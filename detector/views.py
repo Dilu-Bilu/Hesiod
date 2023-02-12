@@ -28,7 +28,7 @@ class LM(AbstractLanguageChecker):
     def __init__(self, model_name_or_path="gpt2"):
         super(LM, self).__init__()
         self.enc = GPT2Tokenizer.from_pretrained('gpt2')
-        self.model = GPT2LMHeadModel.from_pretrained("modelreal")
+        self.model = GPT2LMHeadModel.from_pretrained("gpt2")
         self.model.to(self.device)
         self.model.eval()
         self.start_token = self.enc(self.enc.bos_token, return_tensors='pt').data['input_ids'][0]
