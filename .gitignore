@@ -279,3 +279,4 @@ killgpt/media/
 # AI models 
 # tokenizer/*
 # model/*
+modelreal/pytorch_model.bin
