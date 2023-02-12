@@ -12,10 +12,7 @@ from django.views.generic import (
 
 )
 from .models import Feedback
-# from config.settings.production import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME 
-# Define your AWS credentials
-aws_access_key_id = 'AKIAYHHSQMDH327XPB46'
-aws_secret_access_key = 'SEWMxPs5eMFe2X81b6ab6yXhtXdTiQt5u2YYxo5b'
+
 class AbstractLanguageChecker():
     def __init__(self):
         self.device = torch.device(
