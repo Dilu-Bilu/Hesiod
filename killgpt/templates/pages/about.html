@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{%block content%}
+{% load static %}
+{% load crispy_forms_tags %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Your+Font+Name&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link href="{% static 'css/style.css'%}" rel="stylesheet">
+<main role="main pt-4" style="background: #FFF8DB;">
+    
+   <div class="container py-5 font-weight-bold" style="font-family: 'Kanit', sans-serif">
+    <div class=" pt-5 container col-md-12 rounded text-center">
+   <h1 class="text-black display-4">We would love your feedback.</h1>
+
+   <form action="" method="POST" class = 'input-lg pt-5'enctype="multipart/form-data" style=" background: #FFF8DB;">
+        
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button id="submit-button" class="btn btn-lg px-5 text-white" type="submit" style="background: black; border: w#4E527F;">Send</button>
+    <button id="loading-spinner" class="btn btn-lg px-5 text-white" type="button" style="background: black; border: w#4E527F;display: none;">
+      <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+
+{%endblock content%}

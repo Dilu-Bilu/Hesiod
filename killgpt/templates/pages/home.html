@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+<style>
+    .form-container {
+      width: 25%;
+      margin: 0 auto;
+    }
+    </style>
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Your+Font+Name&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link href="{% static 'css/style.css'%}" rel="stylesheet">
+<main role="main pt-4" style="background: #FFF8DB;">
+    
+   <div class="container py-5 font-weight-bold" style="font-family: 'Kanit', sans-serif">
+    <div class=" pt-5 container col-md-12 rounded text-center">
+   <h1 class="text-black display-4">The best chatbot detector.</h1>
+
+   <form action="" method="POST" class = 'input-lg pt-5'enctype="multipart/form-data" style=" background: #FFF8DB;">
+        
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button id="submit-button" class="btn btn-lg px-5 text-white" type="submit" style="background: black; border: w#4E527F;">Analyze</button>
+    <button id="loading-spinner" class="btn btn-lg px-5 text-white" type="button" style="background: black; border: w#4E527F;display: none;">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+    <script>
+      $(document).ready(function(){
+        $('#submit-button').click(function(){
+          $('#submit-button').hide();
+          $('#loading-spinner').show();
+        });
+      });
+      </script>
+</form>
+</div>
+     
+  </main>
+  {% if output%}
+<style class="">
+  .element {
+  opacity: 0;
+  animation: fade-in 2s forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1.5; }
+}
+.word {
+  margin: auto;
+  color: white;
+  font: 500 normal 2.5em 'Source Code Pro';
+}
+.word2 {
+  margin: auto;
+  color: white;
+  font: 500 normal 2.5em 'Source Code Pro';
+}
+@keyframes type {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+ .type-text {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: type 5s steps(200, end);
+}
+
+</style>
+
+<div class="container col-md-12 element">
+
+  <div class="container bg-black rounded">
+    <div class="m-5 py-5 px-2">
+      <h5 class="text-white type-text" style="font-family: Source Code Pro;">Humanity Score: {{score}}</h5>
+    <h5 class="text-white type-text pt-1" style="font-family: Source Code Pro;">{{decision}}</h5>
+    </div>
+    
+  </div>
+  </div>
+{% endif %}
+{%endblock content%}
+

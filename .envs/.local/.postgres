@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=killgpt
+POSTGRES_USER=XZLuKzWKRVvIeajFYCvmwquoHDUuUBXm
+POSTGRES_PASSWORD=7wsqt7UlpIcUeKAfx54R4I5FLGTXxc9Fa2pJdmc38v1EHnVUdH8s0UsJCh9k90ty
