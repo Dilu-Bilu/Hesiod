@@ -12,10 +12,10 @@ from django.views.generic import (
 
 )
 from .models import Feedback
-from config.settings.production import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME 
+# from config.settings.production import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME 
 # Define your AWS credentials
-aws_access_key_id = AWS_ACCESS_KEY_ID
-aws_secret_access_key = AWS_SECRET_ACCESS_KEY
+aws_access_key_id = 'AKIAYHHSQMDH327XPB46'
+aws_secret_access_key = 'SEWMxPs5eMFe2X81b6ab6yXhtXdTiQt5u2YYxo5b'
 class AbstractLanguageChecker():
     def __init__(self):
         self.device = torch.device(
@@ -26,16 +26,10 @@ class AbstractLanguageChecker():
 
     def postprocess(self, token):
         raise NotImplementedError
-# 
-import boto3
+
 class LM(AbstractLanguageChecker):
     def __init__(self, model_name_or_path="gpt2"):
         super(LM, self).__init__()
-        s3 = boto3.client('s3',
-                  aws_access_key_id=aws_access_key_id,
-                  aws_secret_access_key=aws_secret_access_key)
-        with open("modelreal/pytorch_model.bin", "wb") as f:
-            s3.download_fileobj("<BUCKET_NAME>", "modelreal/pytorch_model.bin", f)
         self.enc = GPT2Tokenizer.from_pretrained('gpt2')
         self.model = GPT2LMHeadModel.from_pretrained("modelreal")
         self.model.to(self.device)
