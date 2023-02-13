@@ -11,7 +11,7 @@ SECRET_KEY = env(
     default="h2WrHzn5GcpgNLyYOrtAqUhywrz8BKVMYwNg5Ti2TSZ7u7nZC5GYiYktMVTlcImh",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", 'hesiodgpt.herokuapp.com',"0.0.0.0", "127.0.0.1", '54.193.19.108', '35.183.112.223', 'ec2-35-183-112-223.ca-central-1.compute.amazonaws.com', '172.31.27.199']
+ALLOWED_HOSTS = ["localhost", '15.156.78.175','hesiodgpt.herokuapp.com',"0.0.0.0", "127.0.0.1", '54.193.19.108', '35.183.112.223', 'ec2-35-183-112-223.ca-central-1.compute.amazonaws.com', '172.31.27.199']
 
 # CACHES
 # ------------------------------------------------------------------------------
