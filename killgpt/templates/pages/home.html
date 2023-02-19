@@ -16,18 +16,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <link href="{% static 'css/style.css'%}" rel="stylesheet">
-<main role="main pt-4" style="background: #FFF8DB;">
+<main role="main py-4" style="background: #FFF8DB;">
     
    <div class="container pt-5 pb-2 font-weight-bold" style="font-family: 'Kanit', sans-serif">
-    <div class=" pt-2 container col-md-8 rounded text-center">
-   <h1 class="text-black display-4">The best chatbot detector.</h1>
+    <div class=" pt-2 container col-md-8 rounded ">
+   <h1 class="text-dark display-4 text-center">The best chatbot detector.</h1>
 
    <form action="" method="POST" class = 'input-lg pt-5'enctype="multipart/form-data" style=" background: #FFF8DB;">
         
     {% csrf_token %}
     {{ form|crispy }}
-    <button id="submit-button" class="btn btn-lg px-5 text-white" type="submit" style="background: black; border: w#4E527F;">Analyze</button>
-    <button id="loading-spinner" class="btn btn-lg px-5 text-white" type="button" style="background: black; border: w#4E527F;display: none;">
+    <p class="text-dark text-left"style="color: #A8A8A8; font-family: 'Kanit', sans-serif; font-size: 12px;">By submitting content, you agree to our <a href="#" class="">Terms of Use</a> and <a href="#" class="">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.</p>
+
+    <button id="submit-button" class="btn block px-5 text-white" type="submit" style="background: black; border: w#4E527F;">{% bs_icon 'search' color='white' size='1em' %} Analyze</button>
+    <button id="loading-spinner" class="btn px-5 text-white" type="button" style="background: black; border: w#4E527F;display: none;">
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Analyzing...
     </button>
@@ -39,11 +41,15 @@
         });
       });
       </script>
+    
+    
+    
 </form>
 </div>
      
   </main>
   {% if output%}
+  
 <style class="">
   .element {
   opacity: 0;
@@ -77,16 +83,17 @@
 
 </style>
 
-<div class="container col-md-12 pb-4 element">
-
+<div class="container col-md-8  pb-4 element">
+<hr>
   <div class="container bg-black rounded">
     <div class="m-5 py-5 px-2">
-      <h5 class="text-white type-text" style="font-family: Source Code Pro;">Humanity Score: {{score}}</h5>
-    <h5 class="text-white type-text pt-1" style="font-family: Source Code Pro;">{{decision}}</h5>
+      <h5 class="text-white type-text" style="font-family: Source Code Pro; font-size: 14px;">Humanity Score: {{score}}</h5>
+    <h5 class="text-white type-text pt-1" style="font-family: Source Code Pro; font-size: 14px;">{{decision}}</h5>
     </div>
     
   </div>
-  <h5 style="font-family: Source Code Pro;">A humanity score above 8.5 indicates that the text was made by a human, and a humanity score under 8.5 indicates that there may have been AI plagiarism involved.</h5>
+  <h6 style="font-family: 'Kanit', sans-serif;">A humanity score above 8.5 indicates that the text was made by a human, and a humanity score under 8.5 indicates that there may have been AI plagiarism involved. Keep in mind that predictions under 50 words can be unpredictable, and poetry cannot be classified.</h6>
   </div>
+  <hr>
 {% endif %}
 {%endblock content%}

@@ -9,12 +9,12 @@ from django.utils.translation import gettext_lazy as _
 from .models import Feedback
 
 class TextInputForm(forms.Form):
-    text_input = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 10, 'cols': 35, 'class': 'custom-field', 'placeholder': 'Enter the text you want to test for AI/Chatbot plagiarism (minimum 20 words)', 'style': 'background-color: #FFF8DB; color: rgb(0,0,0); font-family: Source Code Pro; font-size: 12px;'} ))
+    text_input = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 10, 'cols': 35, 'class': 'custom-field border-black', 'placeholder': 'Enter the text you want to test for AI/Chatbot plagiarism (minimum 20 words)', 'style': 'background-color: #FFF8DB; color: rgb(0,0,0); font-family: Source Code Pro; font-size: 13px; border-color: black;'} ))
     file_input = forms.FileField(required=False, widget=forms.ClearableFileInput(
             attrs={
                 'class': 'custom-file-input',
                 'id': 'customFile',
-                'style': 'background-color: #FFF8DB; color: black; font-family: Source Code Pro; font-size: 12px;',
+                'style': 'background-color: #FFF8DB; color: black; font-family: Source Code Pro; font-size: 13px;',
                 'multiple': True,
             } ))
 

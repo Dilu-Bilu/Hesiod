@@ -12,9 +12,6 @@ from django.views.generic import (
 
 )
 from .models import Feedback
-import PyPDF2
-import docx
-import magic
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
