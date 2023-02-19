@@ -10,18 +10,18 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <link href="{% static 'css/style.css'%}" rel="stylesheet">
-<main role="main pt-4" style="background: #FFF8DB;">
-   <div class=" pt-4 font-weight-bold" style="font-family: 'Kanit', sans-serif">
-    <div class="  container col-md-8 bg-light">
+<main role="main py-4" style="background: #FFF8DB;">
+   <div class=" py-4 font-weight-bold" style="font-family: 'Kanit', sans-serif">
+    <div class="  container col-md-8 bg-black rounded">
       <div class="container px-0 row">
         <div class="col-md-4">
           <div class="pt-2">
-            <h3 class="mb-4">Contact Us</h3>
+            <h3 class="mb-4 text-white">Contact Us</h3>
            
-            <form method="POST" id="contactForm" name="contactForm" class="contactForm" novalidate="novalidate">
+            <form method="POST" id="contactForm" name="contactForm" class="contactForm text-light input-dark" novalidate="novalidate">
               {% csrf_token %}
               {{ form|crispy }}
-              <button id="submit-button" class="btn btn-lg px-5 text-white" type="submit" style="background: black;; border: w#2633be;">Send</button>
+              <button id="submit-button" class="btn btn-lg px-5 text-black" type="submit" style="background: #858585; border: w#2633be;">Send</button>
               <button id="loading-spinner" class="btn btn-lg px-5 text-white" type="button" style="background: black; border: w#4E527F;display: none;">
                 <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
                 Loading...

@@ -47,7 +47,7 @@ class FeedbackForm(forms.ModelForm):
             'Name': forms.TextInput(attrs={'class': 'form-control'}),
             'Email': forms.TextInput(attrs={'class': 'form-control'}),
             'Title': forms.TextInput(attrs={'class': 'form-control'}),
-            'Content': forms.Textarea(attrs={'class': 'form-control','rows': 3, 'cols': 4,}),
+            'Content': forms.Textarea(attrs={'class': 'form-control','rows': 2, 'cols': 4,}),
          }
 
 class FileUploadForm(forms.Form):
