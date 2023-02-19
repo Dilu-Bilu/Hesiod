@@ -48,11 +48,25 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ">
               <li class="nav-item active">
-                <h3><a class="nav-link active" href="{% url 'home' %}"><h6>Home</h6> <span class="visually-hidden">(current)</span></a></h3>
+                <h3><a class="nav-link active" href="{% url 'home' %}"><h6>Detector</h6> <span class="visually-hidden">(current)</span></a></h3>
               </li>
               <li class="nav-item active">
-                <h3 class="text-blacks"><a class="nav-link active" href="{% url 'about' %}"><h6>About/Contact</h6></a></h3>
+                <h3 class="text-blacks"><a class="nav-link active" href="{% url 'about' %}"><h6>Contact</h6></a></h3>
               </li>
+              {% if request.user.is_authenticated %}
+                  <li class="nav-item">
+                    {# URL provided by django-allauth/account/urls.py #}
+                    <a class="nav-link active" href="{% url 'account_logout' %}"><h6>{% translate "Sign Out" %}</h6></a>
+                  </li>
+                {% else %}
+
+                  {% if ACCOUNT_ALLOW_REGISTRATION %}
+                {% endif %}
+                  <li class="nav-item">
+                    {# URL provided by django-allauth/account/urls.py #}
+                    <a id="log-in-link" class="nav-link active" href="{% url 'account_login' %}"><h6>{% translate "Sign In" %}</h6></a>
+                  </li>
+                {% endif %}
               </li>
             </ul>
           </div>

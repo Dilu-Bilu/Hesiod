@@ -12,6 +12,14 @@ from django.views.generic import (
 
 )
 from .models import Feedback
+import PyPDF2
+import docx
+import magic
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 
 class AbstractLanguageChecker():
     def __init__(self):
@@ -134,41 +142,87 @@ def limit_string_size(string):
     print(limited_string)
     return limited_string
 
+from django.shortcuts import render
+from .forms import TextInputForm
+import PyPDF2
+import docx
+import magic
+import unicodedata
+import time
 
+import fitz
+
+def process_file(file):
+    file_type = magic.from_buffer(file.read(), mime=True)
+    file.seek(0)
+    if file_type == 'application/pdf':
+        doc = fitz.open(stream=file.read(), filetype='pdf')
+        text = ''
+        for page in doc:
+            text += page.get_text()
+        return text
+    elif file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        doc = docx.Document(file)
+        text = ''
+        for para in doc.paragraphs:
+            text += para.text
+        return text
+    else:
+        raise ValueError('Unsupported file type')
+
+# Only signed in users can go onto the detector 
+@user_passes_test(lambda u: u.is_authenticated, login_url='/accounts/login/')
 def TextInputView(request):
+    # Load the user's input 
     form = TextInputForm()
     if request.method == 'POST':
-        form = TextInputForm(request.POST)
+        form = TextInputForm(request.POST, request.FILES)
         if form.is_valid():
             initial = time.time()
-            input_text = str(form.cleaned_data['text_input'])
-            # input_text = limit_string_size(text)
-            # 
+            text_input = form.cleaned_data['text_input']
+            file_input = form.cleaned_data['file_input']
+            # validate the file's content
+            if file_input:
+                try:
+                    input_text = process_file(file_input)
+                except ValueError as e:
+                    context = {'form': form, 'error': str(e)}
+                    return render(request, 'pages/home.html', context)
+            else:
+                input_text = text_input
+            # Limit the word count 
+            words = input_text.split()
+            limited_words = words[:650]
+            input_text = " ".join(limited_words)
             # Write the text after deleting text because it only works this way.
             with open('detector/texts.txt', 'a') as file:
                 file.truncate(0)
                 file.write(input_text)
-         
+            # Cleans the text.
             with open('detector/texts.txt', 'r') as file:
-                input_text = str(file.read())
+                input_text = file.read()
+            # Clean the text form all non-utf shit
             input_text = unicodedata.normalize("NFKD", input_text).encode("ascii", "ignore").decode("utf-8")
+            # Run it through the main function; this is where the magic happens
             score = main_code(input_text)
             final = time.time()
             print("Open time:", round(final-initial, 1))
+            # Evaluate whether the code was AI or not
             if score > 8.25: 
                 decision = "This seems to be human text."
             else: 
                 decision = "This text is most likely AI generated."
-        context = {'form': form,'output': score, 'score': score, 'decision': decision}
-    else: 
+            context = {'form': form,'output': score, 'score': score, 'decision': decision}
+        else:
+            context = {'form': form}
+    else:
         context = {'form': form}
     
     return render(request, 'pages/home.html', context)
 
-
 class FeedbackCreateView(CreateView):
     model = Feedback
-    fields = ["Title", "Content"]
+    fields = ["Name", "Email", "Title", "Content"]
     context_object_name = "Feedback"
     template_name = 'pages/about.html'
     success_url ='/about'
