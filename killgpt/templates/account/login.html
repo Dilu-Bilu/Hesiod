@@ -8,7 +8,14 @@
 
 {% block inner %}
 
-<h1>{% translate "Sign In" %}</h1>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Your+Font+Name&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<h2 style="font-family: Source Code Pro; font-size: 36px;">Sign in</h2>
+
 
 {% get_providers as socialaccount_providers %}
 
@@ -37,7 +44,7 @@
 
 {% else %}
   {% if ACCOUNT_ALLOW_REGISTRATION %}
-    <p>
+    <p style="font-family: Source Code Pro; font-size: 14px;">
       {% blocktranslate trimmed %}
         <!-- If you have not created an account yet, then please
         <a href="{{ signup_url }}">sign up</a> first. -->
@@ -47,7 +54,7 @@
   {% endif %}
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
+<form class="login" method="POST" action="{% url 'account_login' %}" style="font-family: Source Code Pro; font-size: 14px;">
   {% csrf_token %}
   {{ form|crispy }}
   {% if redirect_field_value %}
