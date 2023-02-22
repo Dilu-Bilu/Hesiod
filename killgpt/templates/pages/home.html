@@ -73,6 +73,7 @@
         
     {% csrf_token %}
     {{ form|crispy }}
+    <p class="mt-0"style='font-family: Source Code Pro; font-size: 10px;'>We support pdf, word, and txt file types.</p>
     <p class="text-dark text-left"style="color: #A8A8A8; font-family: Source Code Pro;font-size: 12px;">By submitting content, you agree to our <a href="#" class="">Terms of Use</a> and <a href="#" class="">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.</p>
 
     <button id="submit-button" class="btn block px-5 text-white" type="submit" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;">{% bs_icon 'search' color='white' size='1em' %} Analyze</button>
@@ -180,18 +181,6 @@
                   </div>
                 </div>
 
-                <div class="accordion-item"style="background: #FFF8DB;">
-                  <h2 class="accordion-header"style="background: #FFF8DB;">
-                    <button class="accordion-button collapsed"style="background: #FFF8DB;" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
-                      Who are the creators of Hesiod?
-                    </button>
-                  </h2>
-                  <div id="faq2-content-3" style="background: #FFF8DB;"class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                    <div class="accordion-body">
-                      We are a part of a secret society. SHHH.
-                    </div>
-                  </div>
-                </div>
                 <div class="accordion-item"style="background: #FFF8DB;">
                   <h2 class="accordion-header"style="background: #FFF8DB;">
                     <button class="accordion-button collapsed"style="background: #FFF8DB;" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-4">
