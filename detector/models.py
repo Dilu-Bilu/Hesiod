@@ -14,6 +14,3 @@ class Feedback(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-class UploadedFile(models.Model):
-    file = models.FileField(upload_to='uploads/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
