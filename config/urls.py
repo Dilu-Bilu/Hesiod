@@ -5,13 +5,34 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from detector.views import TextInputView, FeedbackCreateView
+from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import Sitemap
+from django.urls import reverse
+
+class HomeSitemap(Sitemap):
+    def items(self):
+        return ['home']
+
+    def location(self, item):
+        return reverse(item)
+sitemaps = {
+    'home': HomeSitemap,
+}
+
 
 urlpatterns = [
     path("", TextInputView, name="home"),
     # path("AI/", TextInputView, name='AI'),
     path(
+        "tos/", TemplateView.as_view(template_name="pages/terms.html"), name="terms"
+    ),
+    path(
+        "pp/", TemplateView.as_view(template_name="pages/privacy.html"), name="pp"
+    ),
+    path(
         "about/", FeedbackCreateView.as_view(), name="about"
     ),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
