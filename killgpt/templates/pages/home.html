@@ -74,8 +74,9 @@
     {% csrf_token %}
     {{ form|crispy }}
     <p class="mt-0"style='font-family: Source Code Pro; font-size: 10px;'>We support pdf, word, and txt file types.</p>
-    <p class="text-dark text-left"style="color: #A8A8A8; font-family: Source Code Pro;font-size: 12px;">By submitting content, you agree to our <a href="#" class="">Terms of Use</a> and <a href="#" class="">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.</p>
+    <p class="text-dark text-left"style="color: #A8A8A8; font-family: Source Code Pro;font-size: 12px;">By submitting content, you agree to our <a href="{% url 'terms' %}" target="_blank" class="">Terms of Use</a> and <a href="{% url 'pp' %}" class=""target="_blank">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.</p>
 
+    {% if user.is_authenticated %}
     <button id="submit-button" class="btn block px-5 text-white" type="submit" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;">{% bs_icon 'search' color='white' size='1em' %} Analyze</button>
     <button id="loading-spinner" class="btn px-5 text-white" type="button" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;display: none;">
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -89,10 +90,16 @@
         });
       });
       </script>
+      </form>
+    {% else %}
+  </form>
+    <a href="{% url 'account_login'%}" class="pt-0 mt-0"><button id="submit-button" class="btn block px-5 text-white" type="submit" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;">{% bs_icon 'person' color='white' size='1em' %} Log In</button></a>
+    {%endif%}
+
     
     
     
-</form>
+
 <hr>
       <!-- ======= F.A.Q Section ======= -->
       <section id="faq" class="faq">

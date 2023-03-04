@@ -168,7 +168,7 @@ def process_file(file):
         raise ValueError('Unsupported file type')
 
 # Only signed in users can go onto the detector 
-@user_passes_test(lambda u: u.is_authenticated, login_url='/accounts/login/')
+# @user_passes_test(lambda u: u.is_authenticated, login_url='/accounts/login/')
 def TextInputView(request):
     # Load the user's input 
     form = TextInputForm()
