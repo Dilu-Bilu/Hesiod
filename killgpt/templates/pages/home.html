@@ -68,15 +68,37 @@
      <h6 style="font-family: 'Kanit', sans-serif;">A humanity score above 8.5 indicates that the text was made by a human, and a humanity score under 8.5 indicates that there may have been AI plagiarism involved. Keep in mind that predictions under 50 words can be unpredictable, and poetry cannot be classified.</h6>
      </div>
      <hr>
+     <h6 class ='text-center'style="font-family: 'Kanit', sans-serif;">{% bs_icon 'square-fill' color='white' size='1em' %} AI-text is highlighted in white.</h6>
+     <div class="container bg-black lh-2 rounded">
+      <div class="m-5 py-5 px-2">
+        {% if decision == 'This seems to be human text.'%}
+          <h5 class="text-white lh-2 double-spaced" style="font-family: Source Code Pro; font-size: 14px;">{{input_text}}</h5>
+        {% else %}
+        <h5 class="text-white lh-2 double-spaced" style="font-family: Source Code Pro; font-size: 14px;"><span style="background-color: white; color: black">{{input_text}}</span></h5>
+
+        {% endif %}
+        
+
+        <style>
+          .double-spaced {
+            line-height: 2;
+          }
+        </style>
+      </div>
+     </div>
+     
+     <hr>
+     
    {% endif %}
+   
    <form action="" method="POST" class = 'input-lg py-5'enctype="multipart/form-data" style=" background: #FFF8DB;">
         
     {% csrf_token %}
     {{ form|crispy }}
     <p class="mt-0"style='font-family: Source Code Pro; font-size: 10px;'>We support pdf, word, and txt file types.</p>
-    <p class="text-dark text-left"style="color: #A8A8A8; font-family: Source Code Pro;font-size: 12px;">By submitting content, you agree to our <a href="{% url 'terms' %}" target="_blank" class="">Terms of Use</a> and <a href="{% url 'pp' %}" class=""target="_blank">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.</p>
+    <p class="text-dark text-left"style="color: #A8A8A8; font-family: Source Code Pro;font-size: 12px;">By submitting content, you agree to our <a href="{% url 'terms' %}" target="_blank" class="">Terms of Use</a> and <a href="{% url 'pp' %}" class=""target="_blank">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.  Also, ensure that all personal information should be purged from any files/text being submitted for analysis.</p>
 
-    {% if user.is_authenticated %}
+
     <button id="submit-button" class="btn block px-5 text-white" type="submit" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;">{% bs_icon 'search' color='white' size='1em' %} Analyze</button>
     <button id="loading-spinner" class="btn px-5 text-white" type="button" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;display: none;">
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -91,10 +113,7 @@
       });
       </script>
       </form>
-    {% else %}
-  </form>
-    <a href="{% url 'account_login'%}" class="pt-0 mt-0"><button id="submit-button" class="btn block px-5 text-white" type="submit" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;">{% bs_icon 'person' color='white' size='1em' %} Log In</button></a>
-    {%endif%}
+
 
     
     

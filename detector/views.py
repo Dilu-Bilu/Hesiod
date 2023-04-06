@@ -209,7 +209,7 @@ def TextInputView(request):
                 decision = "This seems to be human text."
             else: 
                 decision = "This text is most likely AI generated."
-            context = {'form': form,'output': score, 'score': score, 'decision': decision}
+            context = {'form': form,'output': score, 'score': score, 'decision': decision, 'input_text': input_text,}
         else:
             context = {'form': form}
     else:

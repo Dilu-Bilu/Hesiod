@@ -48,4 +48,4 @@ class FeedbackForm(forms.ModelForm):
             'Email': forms.TextInput(attrs={'class': 'form-control'}),
             'Title': forms.TextInput(attrs={'class': 'form-control'}),
             'Content': forms.Textarea(attrs={'class': 'form-control','rows': 2, 'cols': 4,}),
-         }
+        }
