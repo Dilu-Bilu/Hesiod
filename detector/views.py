@@ -30,10 +30,10 @@ class AbstractLanguageChecker():
         raise NotImplementedError
 
 class LM(AbstractLanguageChecker):
-    def __init__(self, model_name_or_path="gpt2"):
+    def __init__(self, model_name_or_path="gpt2-XL"):
         super(LM, self).__init__()
         self.enc = GPT2Tokenizer.from_pretrained('gpt2')
-        self.model = GPT2LMHeadModel.from_pretrained("gpt2")
+        self.model = GPT2LMHeadModel.from_pretrained("modelreal")
         self.model.to(self.device)
         self.model.eval()
         self.start_token = self.enc(self.enc.bos_token, return_tensors='pt').data['input_ids'][0]
@@ -112,7 +112,7 @@ class LM(AbstractLanguageChecker):
 
 
 def humanity_score(final):
-    score = (10* final[1]/final[0] + 30 * (final[2]/final[0]) + 100 * (final[3]/final[0]))
+    score = (10* final[1]/final[0] + 30 * (final[2]/final[0]) + 115 * (final[3]/final[0]))
     return score 
 
 def main_code(raw_text):
@@ -205,7 +205,7 @@ def TextInputView(request):
             final = time.time()
             print("Open time:", round(final-initial, 1))
             # Evaluate whether the code was AI or not
-            if score > 8.25: 
+            if score > 7.25: 
                 decision = "This seems to be human text."
             else: 
                 decision = "This text is most likely AI generated."
