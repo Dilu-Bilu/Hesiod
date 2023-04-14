@@ -213,7 +213,7 @@ def TextInputView(request):
                 decision = "This seems to be human text."
             else: 
                 decision = "This text is most likely AI generated."
-            percent = percent_certainty(humanity_score)
+            percent = percent_certainty(score) * 100
             context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text,}
         else:
             context = {'form': form}
