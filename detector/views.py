@@ -15,7 +15,7 @@ from .models import Feedback
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+import math 
 
 
 class AbstractLanguageChecker():
@@ -115,6 +115,10 @@ def humanity_score(final):
     score = (10* final[1]/final[0] + 30 * (final[2]/final[0]) + 115 * (final[3]/final[0]))
     return score 
 
+
+def percent_certainty(humanity_score):
+    return abs(2/(1+ math.exp(-6 * (humanity_score - 7.25)))-1)
+
 def main_code(raw_text):
     final = []
     lm = LM()
@@ -209,7 +213,8 @@ def TextInputView(request):
                 decision = "This seems to be human text."
             else: 
                 decision = "This text is most likely AI generated."
-            context = {'form': form,'output': score, 'score': score, 'decision': decision, 'input_text': input_text,}
+            percent = percent_certainty(humanity_score)
+            context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text,}
         else:
             context = {'form': form}
     else:
