@@ -5,7 +5,7 @@
 {% load crispy_forms_tags %}
 
 {% block head_title %}{% translate "Sign In" %}{% endblock %}
-
+{% load static %}
 {% block inner %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,13 +13,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Source+Code+Pro&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Your+Font+Name&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="container" style="background-color: #2B253B;">
 
-<h2 style="font-family: Source Code Pro; font-size: 36px;">Sign in</h2>
+  <h2 class="display-4 text-center"style='font-size: 5em;
+  font-weight: 800;
+  color: white;
+  line-height: 1em;
+  text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 40px; color: var(--text-color);'>Sign In</h2>
 
+  <!-- <img class="w-20"src="{% static 'images/signup_photo.jpg'%}" alt="" > -->
 
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
+  
   <p>
     {% translate "Please sign in with one of your existing third party accounts:" %}
     {% if ACCOUNT_ALLOW_REGISTRATION %}
@@ -44,24 +51,26 @@
 
 {% else %}
   {% if ACCOUNT_ALLOW_REGISTRATION %}
-    <p style="font-family: Source Code Pro; font-size: 14px;">
+    <p class='text-white'style=" font-size: 14px;">
       {% blocktranslate trimmed %}
-        <!-- If you have not created an account yet, then please
-        <a href="{{ signup_url }}">sign up</a> first. -->
+        If you have not created an account yet, then please
+        <a href="{{ signup_url }}">sign up</a> first.
         Please sign in to your account before accessing the proprietary detector.
       {% endblocktranslate %}
     </p>
   {% endif %}
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}" style="font-family: Source Code Pro; font-size: 14px;">
+<form class="login" method="POST" action="{% url 'account_login' %}" style=" font-size: 14px;">
   {% csrf_token %}
-  {{ form|crispy }}
+  {{ form | crispy }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% translate "Forgot Password?" %}</a>
-  <button class="primaryAction btn btn-primary" type="submit">{% translate "Sign In" %}</button>
+  <button class="primaryAction btn-lg rounded" style='background-color: aqua;'type="submit">{% translate "Sign In" %}</button>
 </form>
+</div>
+
 
 {% endblock %}

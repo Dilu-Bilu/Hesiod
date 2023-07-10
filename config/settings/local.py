@@ -90,7 +90,7 @@ MEDIA_URL = f"https://{aws_s3_domain}/media/"
 # from .base import *  # noqa
 # from .base import env
 
-# # GENERAL
+# # GENERAL/
 # # ------------------------------------------------------------------------------
 # # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 # DEBUG = True

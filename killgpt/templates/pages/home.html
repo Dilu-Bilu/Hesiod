@@ -3,10 +3,15 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load bootstrap_icons %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
 <style>
     .form-container {
       width: 25%;
       margin: 0 auto;
+    }
+    :root {
+      --background-color: #201A31;
+      --text-color: white;
     }
     </style>
        <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,14 +21,18 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <link href="{% static 'css/style.css'%}" rel="stylesheet">
-<main role="main py-4" style="background: #FFF8DB;">
+<main role="main py-4" style="background: var(--background-color);">
     
-   <div class="container pt-5 pb-2 font-weight-bold" style="font-family: 'Kanit', sans-serif">
+   <div class="container pt-5 pb-2 font-weight-bold" style="font-family: Poppins, sans-serif;">
     <div class=" pt-2 container col-md-8 rounded ">
-   <h1 class="text-dark display-4 text-center"style='font-family: Source Code Pro; font-size: 40px;'>The best chatbot detector.</h1>
+   <h2 class="display-4 text-center"style='font-size: 5em;
+   font-weight: 800;
+   color: #fff;
+   line-height: 1em;
+   text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 40px; color: var(--text-color);'>The best chatbot detector.</h2>
    {% if output%}
   
-   <style class="">
+   <!-- <style class="">
      .element {
      opacity: 0;
      animation: fade-in 2s forwards;
@@ -36,12 +45,12 @@
    .word {
      margin: auto;
      color: white;
-     font: 500 normal 2.5em 'Source Code Pro';
+     font: 500 normal 2.5em 'Poppins, sans-serif';
    }
    .word2 {
      margin: auto;
      color: white;
-     font: 500 normal 2.5em 'Source Code Pro';
+     font: 500 normal 2.5em 'Poppins, sans-serif';
    }
    @keyframes type {
      0% { width: 0; }
@@ -52,30 +61,38 @@
      overflow: hidden;
      white-space: nowrap;
      animation: type 5s steps(200, end);
-   }
+   } -->
    
    </style>
    
-   <div class="container col-md-8  pb-4 element">
-   <hr>
-     <div class="container bg-black rounded">
-       <div class="m-5 py-5 px-2">
-         <h5 class="text-white type-text" style="font-family: Source Code Pro; font-size: 20px;">Humanity Score: {{score}}</h5>
-       <h5 class="text-white type-text pt-1" style="font-family: Source Code Pro; font-size: 20px;">{{decision}}</h5>
-       <h5 class="text-white type-text pt-1" style="font-family: Source Code Pro; font-size: 20px;">We are {{percent}}% sure of our decision.</h5>
+   <div class="container col-md-10 text pb-4 element">
+    <hr class="bg-white">
+     <div class="container bg-white rounded">
+       <div class="m-1 py-5 px-2 text-center">
+          <h5 class="text-black type-text" style="font-family: Poppins, sans-serif; font-size: 20px;">Humanity Score: {{score}}</h5>
+          <h5 class="text-black type-text pt-1" style="font-family: Poppins, sans-serif; font-size: 20px;">{{decision}}</h5>
+          <h5 class="text-black type-text pt-1" style="font-family: Poppins, sans-serif; font-size: 20px; ">We are {{percent}}% sure of our decision.</h5>
        </div>
        
      </div>
-     <h6 style="font-family: 'Kanit', sans-serif;">A humanity score above 7.25 indicates that the text was made by a human, and a humanity score under 7.25 indicates that there may have been AI plagiarism involved. Keep in mind that predictions under 50 words can be unpredictable, and poetry cannot be classified.</h6>
+     <h6 style="font-family: Poppins, sans-serif; font-size: 1.1em;
+     color: #fff;
+     margin: 20px 0;
+     font-weight: 400;
+     max-width: 700px;">A humanity score above 8.25 indicates that the text was made by a human, and a humanity score under 8.25 indicates that there may have been AI plagiarism involved. Keep in mind that predictions under 50 words can be unpredictable, and poetry cannot be classified.</h6>
      </div>
-     <hr>
-     <h6 class ='text-center'style="font-family: 'Kanit', sans-serif;">{% bs_icon 'square-fill' color='white' size='1em' %} AI-text is highlighted in white.</h6>
+     <hr class="bg-white">
+     <h6 class ='text-center'style="font-family: Poppins, sans-serif; font-size: 1.1em;
+     color: #fff;
+     margin: 20px 0;
+     font-weight: 400;
+     max-width: 700px;">{% bs_icon 'square-fill' color='white' size='1em' %} AI-text is highlighted in white.</h6>
      <div class="container bg-black lh-2 rounded">
       <div class="m-5 py-5 px-2">
         {% if decision == 'This seems to be human text.'%}
-          <h5 class="text-white lh-2 double-spaced" style="font-family: Source Code Pro; font-size: 14px;">{{input_text}}</h5>
+          <h5 class="text-white lh-2 double-spaced" style="font-family: Poppins, sans-serif; font-size: 14px;">{{input_text}}</h5>
         {% else %}
-        <h5 class="text-white lh-2 double-spaced" style="font-family: Source Code Pro; font-size: 14px;"><span style="background-color: white; color: black">{{input_text}}</span></h5>
+        <h5 class="text-white lh-2 double-spaced" style="font-family: Poppins, sans-serif; font-size: 14px;"><span style="background-color: white; color: black">{{input_text}}</span></h5>
 
         {% endif %}
         
@@ -88,20 +105,30 @@
       </div>
      </div>
      
-     <hr>
+      <hr class="bg-white">
      
    {% endif %}
    
-   <form action="" method="POST" class = 'input-lg py-5'enctype="multipart/form-data" style=" background: #FFF8DB;">
+   <form action="" method="POST" class = 'input-lg py-5'enctype="multipart/form-data" style=" background: var(--background-color);">
         
     {% csrf_token %}
     {{ form|crispy }}
-    <p class="mt-0"style='font-family: Source Code Pro; font-size: 10px;'>We support pdf, word, and txt file types.</p>
-    <p class="text-dark text-left"style="color: #A8A8A8; font-family: Source Code Pro;font-size: 12px;">By submitting content, you agree to our <a href="{% url 'terms' %}" target="_blank" class="">Terms of Use</a> and <a href="{% url 'pp' %}" class=""target="_blank">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.  Also, ensure that all personal information should be purged from any files/text being submitted for analysis.</p>
+    <p class="mt-0 text-white"style='font-family: Poppins, sans-serif; font-size: 10px;'>We support pdf, word, and txt file types.</p>
+    <p class=" text-left text-white"style=" font-family: Poppins, sans-serif;font-size: 12px;">By submitting content, you agree to our <a href="{% url 'terms' %}" target="_blank" class="">Terms of Use</a> and <a href="{% url 'pp' %}" class=""target="_blank">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.  Also, ensure that all personal information should be purged from any files/text being submitted for analysis.</p>
 
 
-    <button id="submit-button" class="btn block px-5 text-white" type="submit" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;">{% bs_icon 'search' color='white' size='1em' %} Analyze</button>
-    <button id="loading-spinner" class="btn px-5 text-white" type="button" style="background: black; font-family: Source Code Pro; font-size: 14px; border: w#4E527F;display: none;">
+    <button id="submit-button" class="btn block px-5 text-black" type="submit" style="display: inline-block;
+    font-size: 1em;
+    background: aqua;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 10px;
+    color: #111;
+    letter-spacing: 2px;
+    transition: 0.2s;">{% bs_icon 'search' color='black' size='1em' %} Analyze</button>
+    <button id="loading-spinner" class="btn px-5 text-black" type="button" style="background: aqua; font-family: Poppins, sans-serif; font-size: 14px; border: w#4E527F;display: none;">
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Analyzing...
     </button>
@@ -120,115 +147,9 @@
     
     
 
-<hr>
-      <!-- ======= F.A.Q Section ======= -->
-      <section id="faq" class="faq">
-
-        <div class="container" data-aos="fade-up">
-
-        
-            <h2 style="font-family: Source Code Pro; font-size: 24px;">About the AI Text Classifier</h2>
-       
-       
-
-       
-            <div class="col-lg-12" style="background: #FFF8DB;">
-              <!-- F.A.Q List 1-->
-              <div class="accordion accordion-flush"  style="background: #FFF8DB;" id="faqlist1">
-                <div class="accordion-item"  style="background: #FFF8DB;">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed"  style="background: #FFF8DB; font-family: Source Code Pro; font-size: 14px;"type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                      How do I interpret the results from the classifier?
-                    </button>
-                  </h2>
-                  <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                    <div class="accordion-body" style="font-family: Source Code Pro; font-size: 14px;">
-                      All you have to do is see the statement that is provided by the result. However, scores that are near 8.5 can be unaccurate and can be either AI or human made text. So, the certainty of the result increases the farther away the humanity score is from 8. For example, a humanity score of 20 would yield a high certainty prediction that the text is human-generated, and a humanity score around 2.5 would yield a high certainty result that the text is AI-generated. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item"style="background: #FFF8DB; font-family: Source Code Pro; font-size: 14px;">
-                  <h2 class="accordion-header"style="background: #FFF8DB;">
-                    <button class="accordion-button collapsed"style="background: #FFF8DB;" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                      How effectively does the classifier detect documents written entirely with AI?
-                    </button>
-                  </h2>
-                  <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                    <div class="accordion-body">
-                     From our pre-production testing, we discovered that we had a detection rate for texts written entirely by AI to be 97% accurate. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item"style="background: #FFF8DB;font-family: Source Code Pro; font-size: 14px;">
-                  <h2 class="accordion-header"style="background: #FFF8DB;">
-                    <button class="accordion-button collapsed" type="button" style="background: #FFF8DB;"data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                      Where can I submit feedback, concerns, or questions about the classifier?
-                    </button>
-                  </h2>
-                  <div id="faq-content-3" class="accordion-collapse collapse" style="background: #FFF8DB;"data-bs-parent="#faqlist1">
-                    <div class="accordion-body">
-                     Simply press the contact button in the top right corner and send us your feedback through the google forms that we have set up. 
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-<hr class="py-0 my-0">
-            <div class="col-lg-12">
-
-              <!-- F.A.Q List 2-->
-              <div class="accordion accordion-flush"style="background: #FFF8DB;font-family: Source Code Pro; font-size: 14px;" id="faqlist2">
-
-                <div class="accordion-item"style="background: #FFF8DB;">
-                  <h2 class="accordion-header"style="background: #FFF8DB;">
-                    <button class="accordion-button collapsed" type="button" style="background: #FFF8DB;"data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                      Can you detect texts made by AI and paraphrased by quillbot?
-                    </button>
-                  </h2>
-                  <div id="faq2-content-1" class="accordion-collapse collapse"style="background: #FFF8DB;" data-bs-parent="#faqlist2">
-                    <div class="accordion-body"style="background: #FFF8DB;">
-                     Yes, this is our specialty and advantage over the marketplace because of the nature of the humanity score and our highly specific algorithms. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item"style="background: #FFF8DB;">
-                  <h2 class="accordion-header"style="background: #FFF8DB;">
-                    <button class="accordion-button collapsed" type="button" style="background: #FFF8DB;"data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
-                      What is the secret feature that is upcoming? 
-                    </button>
-                  </h2>
-                  <div id="faq2-content-2" style="background: #FFF8DB;"class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                    <div class="accordion-body"style="background: #FFF8DB;">
-                     Right now, we are working on an industry-changing paraphrasing analyzer that works with GPT3 to identify co-authored texts that have been written with the help of AI. 
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item"style="background: #FFF8DB;">
-                  <h2 class="accordion-header"style="background: #FFF8DB;">
-                    <button class="accordion-button collapsed"style="background: #FFF8DB;" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-4">
-                      Why are you guys called Hesiod?
-                    </button>
-                  </h2>
-                  <div id="faq2-content-4" style="background: #FFF8DB;"class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                    <div class="accordion-body">
-                     Hesiod was a greek poet, and we want to preserve literature because writing allows us to be independent thinkers. 
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+ <hr class="bg-white">
 
   
-
-        </div>
-
-      </section><!-- End F.A.Q Section -->
-      <hr>
 </div>
      
   </main>

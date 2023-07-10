@@ -22,7 +22,10 @@ sitemaps = {
 
 urlpatterns = [
     path(
-        "", TemplateView.as_view(template_name="pages/landing.html"), name="landing"
+        "landing", TemplateView.as_view(template_name="pages/landing.html"), name="landing"
+    ),
+    path(
+        "", TemplateView.as_view(template_name="pages/landing_real.html"), name="landing2"
     ),
     path("detector/", TextInputView, name="home"),
     # path("AI/", TextInputView, name='AI'),

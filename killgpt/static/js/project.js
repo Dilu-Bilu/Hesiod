@@ -1,9 +1,15 @@
 /* Project specific Javascript goes here. */
-<script>
+
     window.onload = function() {
         document.getElementById("loading-screen").style.display = "none";
     };
     window.onbeforeunload = function() {
         document.getElementById("loading-screen").style.display = "block";
     };
-</script>
+    const menuToggle = document.querySelector('.toggle');
+    const showcase = document.querySelector('.showcase');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      showcase.classList.toggle('active');
+    })

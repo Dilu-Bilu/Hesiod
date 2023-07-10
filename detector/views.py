@@ -33,7 +33,7 @@ class LM(AbstractLanguageChecker):
     def __init__(self, model_name_or_path="gpt2-XL"):
         super(LM, self).__init__()
         self.enc = GPT2Tokenizer.from_pretrained('gpt2')
-        self.model = GPT2LMHeadModel.from_pretrained("modelreal")
+        self.model = GPT2LMHeadModel.from_pretrained("gpt2")
         self.model.to(self.device)
         self.model.eval()
         self.start_token = self.enc(self.enc.bos_token, return_tensors='pt').data['input_ids'][0]
@@ -117,7 +117,7 @@ def humanity_score(final):
 
 
 def percent_certainty(humanity_score):
-    return abs(2/(1+ math.exp(-6 * (humanity_score - 7.25)))-1)
+    return abs(2/(1+ math.exp(-6 * (humanity_score - 8.25)))-1)
 
 def main_code(raw_text):
     final = []
@@ -209,11 +209,12 @@ def TextInputView(request):
             final = time.time()
             print("Open time:", round(final-initial, 1))
             # Evaluate whether the code was AI or not
-            if score > 7.25: 
+            if score > 8.25: 
                 decision = "This seems to be human text."
             else: 
-                decision = "This text is most likely AI generated."
-            percent = percent_certainty(score) * 100
+                decision = "This text is AI generated."
+            percent = round(percent_certainty(score) * 100)
+            score = round(score, 2)
             context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text,}
         else:
             context = {'form': form}
