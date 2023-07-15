@@ -33,6 +33,9 @@ urlpatterns = [
         "tos/", TemplateView.as_view(template_name="pages/terms.html"), name="terms"
     ),
     path(
+        "contact/", TemplateView.as_view(template_name="pages/contact.html"), name="contact"
+    ),
+    path(
         "pp/", TemplateView.as_view(template_name="pages/privacy.html"), name="pp"
     ),
     path(

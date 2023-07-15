@@ -116,8 +116,13 @@ def humanity_score(final):
     return score 
 
 
+
 def percent_certainty(humanity_score):
-    return abs(2/(1+ math.exp(-6 * (humanity_score - 8.25)))-1)
+    percent = abs(2 / (1 + math.exp(-6 * (humanity_score - 8.25))) - 1)
+    lower_range = int(percent * 100) - (int(percent * 100) % 5)
+    upper_range = lower_range + 5
+    return f"{lower_range}-{upper_range}"
+    
 
 def main_code(raw_text):
     final = []
@@ -213,7 +218,7 @@ def TextInputView(request):
                 decision = "This seems to be human text."
             else: 
                 decision = "This text is AI generated."
-            percent = round(percent_certainty(score) * 100)
+            percent = percent_certainty(score)
             score = round(score, 2)
             context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text,}
         else:

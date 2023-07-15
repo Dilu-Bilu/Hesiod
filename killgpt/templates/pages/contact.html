@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+
+{% block content %}
+<style>
+    .gradient-text {
+      background: linear-gradient(to right, #00ffff, #ff00cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+<div class="text col-md-8 offset-md-2 text-center">
+    <h1 class="text-white text-center py-4" style="font-weight: 700;">Your <span class="gradient-text"> Journey</span> Shouldn't End Here</h1> 
+    
+<p2 class="text-white text-center" style="font-size: 1.1em;
+color: #fff;
+font-weight: 400;
+max-width: 700px;">Contact us with any inquiries you have about recruitment, feedback, or imlpementing our product in your school.</p2>
+<div class=" pt-2 text-center">
+    <a href="mailto:d.raju@hesiod.ca" style ='background-color: aqua;'>Email Us</a>
+</div>
+</div>
+    
+
+
+{% endblock %}

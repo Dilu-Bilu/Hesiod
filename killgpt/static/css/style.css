@@ -73,16 +73,9 @@ header .logo
   object-fit: cover;
   opacity: 0.5;
 }
-.showcase img
-{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.8;
-}
+
+  
+
 .overlay
 {
   position: absolute;
@@ -139,10 +132,7 @@ button.custom {
   transition: 0.2s;
 }
 
-button.custom:hover {
-  letter-spacing: 4px;
-  box-shadow: 10px 10px 10px #ffffff;
-}
+
 .text a
 {
   display: inline-block;
@@ -160,7 +150,7 @@ button.custom:hover {
 .text a:hover
 {
   letter-spacing: 4px;
-  box-shadow: 10px 10px 10px #ffffff;
+  
 }
 .social
 {

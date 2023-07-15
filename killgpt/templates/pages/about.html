@@ -8,139 +8,495 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Source+Code+Pro&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Your+Font+Name&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  
+</style>
+<!-- <style>
+  @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+  body {
+    background-color: #201A31;
+    color: white;
+    /* font-family: Poppins; */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  
+  h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  
+  .profile {
+    width: 200px;
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .profile img {
+    width: 100%;
+    max-height: 200px;
+    
+    border-radius: 50%;
+  }
+  
+  .profile h3 {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  
+  .profile p {
+    font-size: 16px;
+  }
+</style> -->
+
+<style>
+  
+  :root {
+      --background-color: #231250;
+      --background-color-secondary: #2A1855;
+      --text-color: white;
+      --bg: white;
+      --static: rgba(225, 225, 225, 0.5);
+      --static4: rgba(225, 225, 225, 0.2);
+      --static3: #ffffff;
+      --static2: #0f0f0f;
+      --static5: rgb(24, 172, 122);
+      --text: #000000;
+      --bg: #ffffff;
+      --primary: #7fd7e6;
+      --secondary: #ffffff;
+      --accent: #e800c1;
+      --textcontrast: #000000;
+      --bgcontrast: #000000;
+      --secondarycontrast: #000000;
+      --primarycontrast: #000000;
+      --accentcontrast: #000000;
+
+      --textaccess: #000000;
+      --bgaccess: #000000;
+      --secondaryaccess: #000000;
+      --primaryaccess: #000000;
+      --accentaccess: #000000;
+
+    }
+  .profile img {
+    width: 200px;
+    max-height: 200px;
+    
+    border-radius: 50%;
+  }
+  .bento-wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 60% 40%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+/* BENTO */
+
+.bento-wrapper {
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 60% 40%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    width: 100%;
+    
+}
+
+.first-row-col1 {
+    grid-area: 1 / 1 / 2 / 5;
+}
+  
+.first-row-col2 {
+    grid-area: 1 / 5 / 2 / 6;
+}
+  
+.second-row-col1 {
+    grid-area: 2 / 1 / 3 / 4;
+}
+  
+.second-row-col2 {
+    grid-area: 2 / 4 / 3 / 6;
+}
+
+.bento-wrapper li {
+	list-style-type: none;
+	padding: 5rem 1rem;
+	text-align: center;
+    max-width: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden;
+}
+
+
+.part6 {
+    width: 100%;
+    max-width: 1920px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: center;
+    align-items: center;
+}
+
+.primary-color-box {
+    background-color: var(--primary);
+    color: var(--text);
+    font-size: var(--h1);
+    font-weight: bold;
+}
+
+.secondary-color-box {
+    background-color: var(--secondary);
+    color: var(--text);
+    font-size: var(--h2);
+    font-weight: bold;
+}
+
+.text-color-box {
+    position: relative;
+    background-color: var(--bg);
+    color: var(--background-color);
+    font-size: var(--subtitle);
+}
+
+.figma-icon {
+    position: absolute;
+    left: -120px;
+    height: 120%;
+}
+
+.bento-link {
+    font-size: var(--p);
+}
+
+.link.bento-link {
+    background-position-y: -0%;
+    background-image: linear-gradient(180deg, transparent 50%, var(--bg) 50%) !important;
+    transition: all 0.1s ease;
+    background-size: 2px;
+    background-size: auto 190%;
+    padding: 3px 0;
+}
+
+.link.bento-link:hover {
+    background-position-y: 100%;
+    color: var(--text);
+    transition: all 0.1s ease;
+}
+
+.accent-color-box {
+    background-color: var(--accent);
+    color: var(--text);
+    font-size: var(--subtitle);
+}
+
+.gradient-text {
+      background: linear-gradient(to right, #00ffff, #ff00cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+
+</style>
 
 <link href="{% static 'css/style.css'%}" rel="stylesheet">
-<main role="main py-4" style="background: #FFF8DB;">
-   <div class=" py-4 font-weight-bold" style="font-family: 'Kanit', sans-serif">
-    <div class="  container col-md-8 bg-black rounded">
-      <div class="container px-0 row">
-        <div class="col-md-4">
-          <div class="pt-2">
-            <h3 class="mb-4 text-white">Contact Us</h3>
-           
-            <form method="POST" id="contactForm" name="contactForm" class="contactForm text-light input-dark" novalidate="novalidate">
-              {% csrf_token %}
-              {{ form|crispy }}
-              <button id="submit-button" class="btn btn-lg px-5 text-black" type="submit" style="background: #858585; border: w#2633be;">Send</button>
-              <button id="loading-spinner" class="btn btn-lg px-5 text-white" type="button" style="background: black; border: w#4E527F;display: none;">
-                <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-                Loading...
-              </button>
-            
-            </form>
-            </div>            
+<main role="main py-4" style="background:  var(--background-color);">
+
+ 
+
+
+  <div class="container text-center text-white py-5">
+    <h4 class="py-5">Who Are We?</h4>
+    
+    <div class="part6" id="bento">
+      <ul class="bento-wrapper">
+          <li class="first-row-col1 primary-color-box" style="font-size: 48px; color: var(--background-color)">A State of the Art AI Detection Company<br><span style="font-size: 20px; font-weight: normal;">preaching reponsible AI usage</span></li>
+          <li class="first-row-col2 secondary-color-box" style="color: var(--background-color); font-size: 28px;">Based in South Surrey<br><span style="font-size: var(--p); font-weight: normal;"></span></li>
+          <li class="second-row-col1 text-color-box">
+              <svg width="335" height="472" viewBox="0 0 335 472" fill="none" xmlns="http://www.w3.org/2000/svg" class="figma-icon">
+                  <path d="M15 236C15 264.427 29.205 289.546 50.8988 304.667C29.205 319.787 15 344.906 15 373.333C15 419.536 52.5239 457 98.7363 457C144.949 457 182.473 419.536 182.473 373.333V304.667V300.156C197.019 312.334 215.764 319.667 236.209 319.667C282.421 319.667 319.945 282.203 319.945 236C319.945 207.573 305.74 182.454 284.046 167.333C305.74 152.213 319.945 127.094 319.945 98.6667C319.945 52.4641 282.421 15 236.209 15H167.473H98.7363C52.5239 15 15 52.4641 15 98.6667C15 127.094 29.205 152.213 50.8988 167.333C29.205 182.454 15 207.573 15 236Z" fill="#D8322D" stroke="var(--background-color)" stroke-width="30" stroke-linejoin="round"/>
+                  <path d="M98.7363 442C136.679 442 167.473 411.237 167.473 373.333V304.667H98.7363C60.7938 304.667 30 335.429 30 373.333C30 411.237 60.7938 442 98.7363 442Z" fill="#D8322D"/>
+                  <path d="M30 236C30 198.096 60.7938 167.333 98.7363 167.333H167.473V304.667H98.7363C60.7938 304.667 30 273.904 30 236Z" fill="#D8322D"/>
+                  <path d="M30 98.6667C30 60.7627 60.7938 30 98.7363 30H167.473V167.333H98.7363C60.7938 167.333 30 136.571 30 98.6667Z" fill="##D8322D"/>
+                  <path d="M167.473 30H236.209C274.151 30 304.945 60.7627 304.945 98.6667C304.945 136.571 274.151 167.333 236.209 167.333H167.473V30Z" fill="#D8322D"/>
+                  <path d="M304.945 236C304.945 273.904 274.151 304.667 236.209 304.667C198.266 304.667 167.473 273.904 167.473 236C167.473 198.096 198.266 167.333 236.209 167.333C274.151 167.333 304.945 198.096 304.945 236Z" fill="#D8322D"/>
+              </svg>
+              <span style="font-weight: bold;color: var(--background-color); font-size: 28px;">As Seen On CBC...</span>
+              <a href="https://www.cbc.ca/listen/live-radio/1-46-on-the-coast/clip/15997068-surrey-grads-aim-use-ai-fight-plagiarism" target="_blank" class="link reversed bento-link" style="color: #D8322D">Check out our interview</a>
+              
+              
+          <li class="second-row-col2 accent-color-box" style="font-weight: bold;color: var(--background-color); font-size: 20px;">
+              Working Toward a Detector that Teachers can Trust Through Research.</li>
+          </li>
+      </ul>
+  </div>
+
+<h4 class="pt-5">Why Hesiod?</h4>
+
+<!-- Card Session  -->
+<div class="col-md-10 offset-md-1 py-5">
+  <div class="row row-cols-1 row-cols-lg-3 g-5">
+    <div class="col">
+      <div class="card h-100 text-center d-flex align-items-center" style="padding: 3em; background:  var(--background-color-secondary);">
+        <svg width="117" height="117" viewBox="0 0 117 117" fill="none" style="z-index: 5;" class="part1-card-img">
+          <circle cx="58.5" cy="58.5" r="58.5" fill="#231250"></circle>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M89.4669 8.85912L58.0465 63.9419L2.44746 41.7023C9.66585 17.5806 32.0298 0 58.5 0C69.872 0 80.4861 3.24483 89.4669 8.85912Z" fill="#9D3596" fill-opacity="0.6"></path>
+          <path d="M81.5 22.5L57.1395 64.8489L32 53.5" stroke="white" stroke-width="7.25581"></path>
+      </svg>
+        <div class="card-body">
+          <h5 class="card-title py-4"><span class="px-1" style="background-color: #9D3596; color: white">Quick To Adapt</span></h5>
+          <p class="card-text text-start">In the world of constantly evolving AI technology, our company seeks to adapt and rise above the newest innovations to preserve acacdemic integrity.</p>
         </div>
-        <div class="col-md-8 px-0 mx-0">
-          <img class="img-fluid w-100" src="{% static 'images/img.jpg'%}" alt="" style="object-fit: cover;">
+       
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 text-center d-flex align-items-center" style="padding: 3em; background:  var(--background-color-secondary);">
+        <svg width="112" height="114" viewBox="0 0 112 114" fill="none" style="z-index: 5;" class="part1-card-img">
+                            <rect width="58" height="58" fill="aqua"></rect>
+                            <rect x="69" y="25" width="33" height="33" fill="#9D3596" fill-opacity="0.6"></rect>
+                            <rect x="69" y="71" width="43" height="43" fill="#FAFAFA" fill-opacity="0.2"></rect>
+                            <rect x="20" y="70" width="38" height="39" fill="#FAFAFA"></rect>
+                        </svg>
+        <div class="card-body">
+          <h5 class="card-title py-4"><span class="px-1" style="background-color: aqua; color: #231250">Easy To Use</span></h5>
+          <p class="card-text text-start">Our simple file upload and minimalistic design makes our detector easy to use for everybody.</p>
+        </div>
+       
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 text-center d-flex align-items-center" style="padding: 3em; background:  var(--background-color-secondary);">
+        <svg width="179" height="89" viewBox="0 0 179 89" fill="none" style="z-index: 5;" class="part1-card-img">
+          <rect y="26" width="154" height="63" fill="#E800C1" fill-opacity="0.6"></rect>
+          <path d="M142 15.5V0" stroke="white" stroke-width="8"></path>
+          <path d="M163 34L178.5 34" stroke="white" stroke-width="8"></path>
+          <path d="M158 19.5L170.5 7" stroke="white" stroke-width="8"></path>
+          <path d="M63 54L74.5 65L95.5 44" stroke="white" stroke-width="8"></path>
+      </svg>
+        <div class="card-body">
+          <h5 class="card-title pt-5 pb-4"><span class="" style="background-color: white; color: #231250">Highly Accurate</span></h5>
+          <p class="card-text text-start">According to preliminary studies, using our detector's 90% detection rate with minimal false-positives is a no brainer. </p>
+        </div>
+       
+      </div>
+    </div>
+        
+  </div>
+</div>
+<!-- This is the section with the the FAQ -->
+
+<style>
+  .accordion-item {
+    background:  white; 
+    color: var(--background-color);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-family: Poppins, sans-serif; 
+    font-size: 24px;
+
+  }
+  .accordion-body {
+    background:  white; 
+    font-family: Poppins, sans-serif; 
+    font-size: 16px;
+    padding-bottom: 1.5em;
+    color: var(--background-color);
+  }
+  .accordion-header {
+    font-family: Poppins, sans-serif; 
+    font-size: 24px;
+    color: var(--background-color);
+  }
+  .blend-in {
+    background: var(--background-color)
+  }
+  .accordion-button {
+    font-family: Poppins, sans-serif; 
+    font-size: 20px;
+    color: var(--background-color);
+
+  }
+</style>
+
+
+<div class=" py-4 font-weight-bold" style="font-family: Poppins, sans-serif;font-size: 16px;">
+  <!-- ======= F.A.Q Section ======= -->
+  <section id="faq" class="faq">
+
+    <div class="container" data-aos="fade-up">
+
+    
+        <h2 style="color: white; font-family: Poppins, sans-serif; font-size: 24px;">FAQ</h2>
+   
+   
+
+   
+        <div class="col-lg-12  text-start" >
+          <!-- F.A.Q List 1-->
+          <div class="accordion accordion  py-4" id="faqlist1">
+            <div class="accordion-item" >
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed btn-primary"  type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                  How do I interpret the results from the classifier?
+                </button>
+              </h2>
+              <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                <div class="accordion-body" style="font-family: Poppins, sans-serif; font-size: 14px;">
+                  All you have to do is see the statement that is provided by the result. However, scores that are near 8.5 can be unaccurate and can be either AI or human made text. So, the certainty of the result increases the farther away the humanity score is from 8. For example, a humanity score of 20 would yield a high certainty prediction that the text is human-generated, and a humanity score around 2.5 would yield a high certainty result that the text is AI-generated. 
+                </div>
+              </div>
+            </div>
+            <hr class="blend-in">
+            <div class="accordion-item">
+              <h2 class="accordion-header border border-white">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                  How effectively does the classifier detect documents written entirely with AI?
+                </button>
+              </h2>
+              <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                <div class="accordion-body">
+                 From our pre-production testing, we discovered that we had a detection rate for texts written entirely by AI to be 97% accurate. 
+                </div>
+              </div>
+            </div>
+<hr class="blend-in">
+            <div class="accordion-item">
+              <h2 class="accordion-header border border-white">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                  Where can I submit feedback, concerns, or questions about the classifier?
+                </button>
+              </h2>
+              <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                <div class="accordion-body">
+                 Simply press the contact button in the top right corner and send us your feedback through the google forms that we have set up. 
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+<hr class="py-0 my-0">
+        <div class="col-lg-12">
+
+          <!-- F.A.Q List 2-->
+          <div class="accordion accordion-flush" id="faqlist2">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header roundedborder border-white">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
+                  Can you detect texts made by AI and paraphrased by quillbot?
+                </button>
+              </h2>
+              <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                <div class="accordion-body">
+                 Yes, this is our specialty and advantage over the marketplace because of the nature of the humanity score and our highly specific algorithms. 
+                </div>
+              </div>
+            </div>
+            <hr class="blend-in">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header border border-white">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
+                  What is the secret feature that is upcoming? 
+                </button>
+              </h2>
+              <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                <div class="accordion-body">
+                 Right now, we are working on an industry-changing paraphrasing analyzer that works with GPT3 to identify co-authored texts that have been written with the help of AI. 
+                </div>
+              </div>
+            </div>
+            <hr class="blend-in">
+            <div class="accordion-item">
+              <h2 class="accordion-header border border-white">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-4">
+                  Why are you guys called Hesiod?
+                </button>
+              </h2>
+              <div id="faq2-content-4"  class="accordion-collapse collapse" data-bs-parent="#faqlist2">
+                <div class="accordion-body">
+                  The name Hesiod comes from the ancient Greek poet Hesiod, who was the first man to write about artificial life and intelligence. Similar to Hesiod and his works, we aim to prevent AI from ruining academic integrity and the nature of human creativity.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+
+  </section><!-- End F.A.Q Section -->
+</div>
+<h4 class="py-5">The Team</h4>
+
+
+    <div class="col offset-md-3">
+      <div class="row gx-2 text-center">
+        <div class="profile col-md-4">
+          <img src=" {% static 'images/dil.jpg' %}">
+          <h3 class=" pt-1 gradient-text">Dilreet Raju</h3>
+          <p>CEO, AI developer</p>
+        </div>
+        
+        <div class="profile col-md-4">
+          <img src="{% static 'images/alex.jpeg' %}">
+          <h3 class="pt-1 gradient-text">Alex Lee</h3>
+          <p>Head of Research</p>
         </div>
       </div>
-            <!-- ======= F.A.Q Section ======= -->
-            <section id="faq" class="faq">
-
-              <div class="container" data-aos="fade-up">
-      
-              
-                  <h2 style="font-family: Source Code Pro; font-size: 24px;">About the AI Text Classifier</h2>
-             
-             
-      
-             
-                  <div class="col-lg-12" style="background: #FFF8DB;">
-                    <!-- F.A.Q List 1-->
-                    <div class="accordion accordion-flush"  style="background: #FFF8DB;" id="faqlist1">
-                      <div class="accordion-item"  style="background: #FFF8DB;">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed"  style="background: #FFF8DB; font-family: Source Code Pro; font-size: 14px;"type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                            How do I interpret the results from the classifier?
-                          </button>
-                        </h2>
-                        <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                          <div class="accordion-body" style="font-family: Source Code Pro; font-size: 14px;">
-                            All you have to do is see the statement that is provided by the result. However, scores that are near 8.5 can be unaccurate and can be either AI or human made text. So, the certainty of the result increases the farther away the humanity score is from 8. For example, a humanity score of 20 would yield a high certainty prediction that the text is human-generated, and a humanity score around 2.5 would yield a high certainty result that the text is AI-generated. 
-                          </div>
-                        </div>
-                      </div>
-      
-                      <div class="accordion-item"style="background: #FFF8DB; font-family: Source Code Pro; font-size: 14px;">
-                        <h2 class="accordion-header"style="background: #FFF8DB;">
-                          <button class="accordion-button collapsed"style="background: #FFF8DB;" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                            How effectively does the classifier detect documents written entirely with AI?
-                          </button>
-                        </h2>
-                        <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                          <div class="accordion-body">
-                           From our pre-production testing, we discovered that we had a detection rate for texts written entirely by AI to be 97% accurate. 
-                          </div>
-                        </div>
-                      </div>
-      
-                      <div class="accordion-item"style="background: #FFF8DB;font-family: Source Code Pro; font-size: 14px;">
-                        <h2 class="accordion-header"style="background: #FFF8DB;">
-                          <button class="accordion-button collapsed" type="button" style="background: #FFF8DB;"data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                            Where can I submit feedback, concerns, or questions about the classifier?
-                          </button>
-                        </h2>
-                        <div id="faq-content-3" class="accordion-collapse collapse" style="background: #FFF8DB;"data-bs-parent="#faqlist1">
-                          <div class="accordion-body">
-                           Simply press the contact button in the top right corner and send us your feedback through the google forms that we have set up. 
-                          </div>
-                        </div>
-                      </div>
-      
-                    </div>
-                  </div>
-      <hr class="py-0 my-0">
-                  <div class="col-lg-12">
-      
-                    <!-- F.A.Q List 2-->
-                    <div class="accordion accordion-flush"style="background: #FFF8DB;font-family: Source Code Pro; font-size: 14px;" id="faqlist2">
-      
-                      <div class="accordion-item"style="background: #FFF8DB;">
-                        <h2 class="accordion-header"style="background: #FFF8DB;">
-                          <button class="accordion-button collapsed" type="button" style="background: #FFF8DB;"data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                            Can you detect texts made by AI and paraphrased by quillbot?
-                          </button>
-                        </h2>
-                        <div id="faq2-content-1" class="accordion-collapse collapse"style="background: #FFF8DB;" data-bs-parent="#faqlist2">
-                          <div class="accordion-body"style="background: #FFF8DB;">
-                           Yes, this is our specialty and advantage over the marketplace because of the nature of the humanity score and our highly specific algorithms. 
-                          </div>
-                        </div>
-                      </div>
-      
-                      <div class="accordion-item"style="background: #FFF8DB;">
-                        <h2 class="accordion-header"style="background: #FFF8DB;">
-                          <button class="accordion-button collapsed" type="button" style="background: #FFF8DB;"data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
-                            What is the secret feature that is upcoming? 
-                          </button>
-                        </h2>
-                        <div id="faq2-content-2" style="background: #FFF8DB;"class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                          <div class="accordion-body"style="background: #FFF8DB;">
-                           Right now, we are working on an industry-changing paraphrasing analyzer that works with GPT3 to identify co-authored texts that have been written with the help of AI. 
-                          </div>
-                        </div>
-                      </div>
-      
-                      <div class="accordion-item"style="background: #FFF8DB;">
-                        <h2 class="accordion-header"style="background: #FFF8DB;">
-                          <button class="accordion-button collapsed"style="background: #FFF8DB;" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-4">
-                            Why are you guys called Hesiod?
-                          </button>
-                        </h2>
-                        <div id="faq2-content-4" style="background: #FFF8DB;"class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                          <div class="accordion-body">
-                           Hesiod was a greek poet, and we want to preserve literature because writing allows us to be independent thinkers. 
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-      
+      <div class="row pt-5">
+        <div class="profile col-md-4">
+          <img src="{% static 'images/ethan.jpg' %}">
+          <h3 class="pt-1 gradient-text">Ethan Wang</h3>
+          <p>Head of Management</p>
+        </div>
         
+        <div class="profile col-md-4">
+          <img src="{% static 'images/jai.jpg' %}">
+          <h3 class=" pt-1 gradient-text">Jaideep Heer</h3>
+          <p>Head of Marketing</p>
+        </div>
+      </div>
       
-              </div>
       
-            </section><!-- End F.A.Q Section -->
+    </div>
+  </div>
+   
  
 
    

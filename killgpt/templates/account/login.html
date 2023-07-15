@@ -13,13 +13,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Source+Code+Pro&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Your+Font+Name&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<div class="container" style="background-color: #2B253B;">
+<div class="container" style="background-color: white;">
 
   <h2 class="display-4 text-center"style='font-size: 5em;
   font-weight: 800;
   color: white;
   line-height: 1em;
-  text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 40px; color: var(--text-color);'>Sign In</h2>
+  text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 40px; color: #201A31;'>Sign In</h2>
 
   <!-- <img class="w-20"src="{% static 'images/signup_photo.jpg'%}" alt="" > -->
 
@@ -51,7 +51,7 @@
 
 {% else %}
   {% if ACCOUNT_ALLOW_REGISTRATION %}
-    <p class='text-white'style=" font-size: 14px;">
+    <p class=''style=" font-family: Poppins, sans-serif; font-size: 14px; color: #201A31;">
       {% blocktranslate trimmed %}
         If you have not created an account yet, then please
         <a href="{{ signup_url }}">sign up</a> first.
@@ -60,15 +60,20 @@
     </p>
   {% endif %}
 {% endif %}
-
-<form class="login" method="POST" action="{% url 'account_login' %}" style=" font-size: 14px;">
+<style>.custom-input {
+  color: #000000;
+}</style>
+<form class="login" method="POST" action="{% url 'account_login' %}" style="font-family: Poppins, sans-serif; font-size: 14px; color: #201A31;">
   {% csrf_token %}
   {{ form | crispy }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% translate "Forgot Password?" %}</a>
-  <button class="primaryAction btn-lg rounded" style='background-color: aqua;'type="submit">{% translate "Sign In" %}</button>
+  <div class="display-flex justify-content-start align-items-middle">
+    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% translate "Forgot Password?" %}</a>
+  <button class="primaryAction btn-lg rounded" style="background-color: aqua;" type="submit">{% translate "Sign In" %}</button>
+  </div>
+  
 </form>
 </div>
 

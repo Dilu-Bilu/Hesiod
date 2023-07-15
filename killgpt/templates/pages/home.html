@@ -10,7 +10,7 @@
       margin: 0 auto;
     }
     :root {
-      --background-color: #201A31;
+      --background-color: #231250;
       --text-color: white;
     }
     </style>
@@ -29,7 +29,7 @@
    font-weight: 800;
    color: #fff;
    line-height: 1em;
-   text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 40px; color: var(--text-color);'>The best chatbot detector.</h2>
+   text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 36px; color: var(--text-color);'>Let's End AI Plagiarism with hesiod.</h2>
    {% if output%}
   
    <!-- <style class="">
@@ -71,7 +71,7 @@
        <div class="m-1 py-5 px-2 text-center">
           <h5 class="text-black type-text" style="font-family: Poppins, sans-serif; font-size: 20px;">Humanity Score: {{score}}</h5>
           <h5 class="text-black type-text pt-1" style="font-family: Poppins, sans-serif; font-size: 20px;">{{decision}}</h5>
-          <h5 class="text-black type-text pt-1" style="font-family: Poppins, sans-serif; font-size: 20px; ">We are {{percent}}% sure of our decision.</h5>
+          <h5 class="text-black type-text pt-1" style="font-family: Poppins, sans-serif; font-size: 20px; ">We are between {{percent}}% sure of our decision.</h5>
        </div>
        
      </div>
@@ -82,7 +82,7 @@
      max-width: 700px;">A humanity score above 8.25 indicates that the text was made by a human, and a humanity score under 8.25 indicates that there may have been AI plagiarism involved. Keep in mind that predictions under 50 words can be unpredictable, and poetry cannot be classified.</h6>
      </div>
      <hr class="bg-white">
-     <h6 class ='text-center'style="font-family: Poppins, sans-serif; font-size: 1.1em;
+     <!-- <h6 class ='text-center'style="font-family: Poppins, sans-serif; font-size: 1.1em;
      color: #fff;
      margin: 20px 0;
      font-weight: 400;
@@ -103,17 +103,17 @@
           }
         </style>
       </div>
-     </div>
+     </div> -->
      
-      <hr class="bg-white">
+   
      
    {% endif %}
    
-   <form action="" method="POST" class = 'input-lg py-5'enctype="multipart/form-data" style=" background: var(--background-color);">
+   <form action="" method="POST" class = 'text-white input-lg py-5'enctype="multipart/form-data" style=" background: var(--background-color);">
         
     {% csrf_token %}
     {{ form|crispy }}
-    <p class="mt-0 text-white"style='font-family: Poppins, sans-serif; font-size: 10px;'>We support pdf, word, and txt file types.</p>
+    <p class="mt-0 text-white"style='font-family: Poppins, sans-serif; font-size: 10px;'>We support pdf, word, and txt file types. However, ensure to remove all images, idenitification, and cover pages to support our document requirements. </p>
     <p class=" text-left text-white"style=" font-family: Poppins, sans-serif;font-size: 12px;">By submitting content, you agree to our <a href="{% url 'terms' %}" target="_blank" class="">Terms of Use</a> and <a href="{% url 'pp' %}" class=""target="_blank">Privacy Policy</a>. Be sure you have appropriate rights to the content before using the AI Text Classifier.  Also, ensure that all personal information should be purged from any files/text being submitted for analysis.</p>
 
 

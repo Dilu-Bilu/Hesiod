@@ -111,7 +111,7 @@ header .logo
   object-fit: cover;
   opacity: 0.5;
 }
-.showcase img
+/* .showcase img
 {
   position: absolute;
   top: 0;
@@ -120,7 +120,7 @@ header .logo
   height: 100%;
   object-fit: cover;
   opacity: 0.8;
-}
+} */
 .overlay
 {
   position: absolute;
@@ -272,18 +272,16 @@ header .logo
             <h3>Unleash Originality.</h3>
             <p>Hesiod is dedicated to the preservation of literature’s essence and furthering self-expression in education. We provide state-of-the-art plagiarism detection solutions, valuing accuracy to avoid false accusations to ensure the integrity of our educational system.</p>
             
-            {% if request.user.is_authenticated %}
+          
             <a href="{% url 'home' %}">Try It Out</a>
 
-            {% else %}
-            <a href="{% url 'account_login' %}">Try It Out</a>
-            {% endif %}
-            <a class='glow_button'style="background-color: aqua; margin-left: 1.5%;"href="{% url 'about' %}">Learn About Hesiod</a>
+            
+            <a class='glow_button'style="background-color: aqua; margin-left: 1.5%;"href="{% url 'contact' %}">Contact Us</a>
             </div>
             <ul class="social">
-            <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li>
-            <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
-            <li><a href="#"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
+            <!-- <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li> -->
+            <li><a target="_blank" href ="https://twitter.com/HesiodAI"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
+            <li><a target="_blank" href="https://www.instagram.com/hesiod.ai/"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
             </ul>
         </section>
 
@@ -298,9 +296,10 @@ header .logo
     <ul>
         <li><a href="{% url 'landing2' %}">Home</a></li>
         <li><a href="{% url 'home' %}">Detector</a></li>
-        <li><a href="#">Sign Up</a></li>
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        <!-- <li><a href="#">Sign Up</a></li>
+        <li><a href="{% url 'account_login' %}">Sign In</a></li> -->
         <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
     </ul>
   </div>
   
