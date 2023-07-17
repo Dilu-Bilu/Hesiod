@@ -120,8 +120,12 @@ def humanity_score(final):
 def percent_certainty(humanity_score):
     percent = abs(2 / (1 + math.exp(-6 * (humanity_score - 8.25))) - 1)
     lower_range = int(percent * 100) - (int(percent * 100) % 5)
+    if lower_range == 100:
+        lower_range = 95
     upper_range = lower_range + 5
+    
     return f"{lower_range}-{upper_range}"
+    
     
 
 def main_code(raw_text):
