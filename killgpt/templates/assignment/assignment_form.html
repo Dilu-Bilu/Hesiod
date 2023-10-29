@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    /* Style the form field with a white bottom border */
+    .custom-form-field {
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid white;
+      color: white;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    
+
+
+  </style>
+<main role="main" >
+
+    {%if not prediction%}
+    <div class="container py-5" >
+        <div class ='col-md-8 offset-md-2 pt-5 rounded ' style="background: #2A1855;;">
+            <h3 class = 'px-5 text-white' > Create Your Assignment</h3>
+
+            
+            <div class= 'container p-5 text-white' >
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+            
+                    {{ form|crispy }}
+                    <button class="btn btn-info" id="logout-btn" type="submit">Create Assignment</button>
+                    <a style="text-decoration: none; " class="btn btn-outline-secondary" href="">Cancel</a>
+                  </form>
+
+                  {% endif%}
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</main>
+
+{% endblock content %}

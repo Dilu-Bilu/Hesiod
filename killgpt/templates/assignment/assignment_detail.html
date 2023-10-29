@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap_icons %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+    :root {
+      --background-color-secondary: #2A1855;
+      }
+  .pie {
+      margin: 16px;
+      height: 160px;
+      width: 160px;
+      border-radius: 50%;
+  }
+
+  .one {
+      background: conic-gradient(
+          dodgerblue 0% 85%,
+          orangered 25% 85%,
+          limegreen 85% 93%,
+          #f9f000 93%
+      );
+  }
+
+  .two {
+      background: conic-gradient(
+          cornflowerblue 0% 35%,
+          darkorange 35% 57%,
+          greenyellow 57% 85%,
+          #FFFFFF 85%
+      );
+  }
+
+  .three {
+        
+        background: conic-gradient(
+            #FD00CC 0% var(--percentage),
+            #231250 var(--percentage)); 
+    } 
+
+  .pie.hollow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .pie.hollow::after {
+      content: '';
+      position: absolute;
+      height: 240px;
+      width: 240px;
+      border-radius: 50%;
+      background-color: #FFFFFF;
+  }
+
+  .pie.two.hollow::after {
+      content: '';
+      position: absolute;
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      background-color: var(--background-color-secondary);
+  }
+
+  .pie.three.hollow::after {
+      content: '';
+      position: absolute;
+      height: 85px;
+      width: 85px;
+      border-radius: 50%;
+      background-color: var(--background-color-secondary);
+  }
+
+  .pie.hollow span {
+      font-size: 28pt;
+      z-index: 2;
+      color: white;
+      font-weight: bold;
+      font-family: "JetBrains Mono", sans-serif ;
+  }
+  .gradient-text {
+      background: linear-gradient(to right, #00ffff, #ff00cc, white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text2 {
+      background: linear-gradient(to right, #00ffff ,#33be4c, white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+</style>
+<div class="col-md-10 offset-md-1">
+    <div class="row pt-5 pt-md-0">
+        <div class="col-md-3" style="background-color: #2A1855;">
+            <div class="p-3">
+                <h2 class="" style="color: white; font-weight: 600;">
+                    <span class="gradient-text"> {{assignment.assignment_title}}</span>
+                </h2>
+            <h4 class="text-white pt-5">Description:</h4>
+            <p class="text-white" style="font-weight: 50;">{{assignment.assignment_description}}</p>
+            <h4 class="text-white pt-5">Learning Goals:</h4>
+            <p class="text-white" style="font-weight: 50;">{{assignment.learning_objectives}}</p>
+            </div>
+            
+            </div>
+        <div class="col-md-9 ">
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <div class="card h-100 p-1" style="background-color: #03D1CA; color: #231250;">
+                        <div class="card-body">
+                            <p class="card-text">Collaborative?</p>
+                            <h3 class="card-title py-4 bold" style="font-weight: 700;">{{assignment.is_collaborative}}</h3>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-3">
+                    <div class="card h-100" style="background-color: #03D1CA; color: #231250;">
+                        <div class="card-body">
+                            <p class="card-text">AI Component?</p>
+                            <h3 class="card-title py-4 bold" style="font-weight: 700;">{{assignment.has_ai_component}}</h3>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-3">
+                    <div class="card h-100" style="background-color: #03D1CA; color: #231250;">
+                        <div class="card-body">
+                            <p class="card-text">Assignment Type</p>
+                            <h3 class="card-title py-4 bold" style="font-weight: 700;">{{assignment.assignment_type}}</h3>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-3">
+                    <div class="card h-100" style="background-color: #03D1CA; color: #231250;">
+                        <div class="card-body">
+                            <p class="card-text">Subject</p>
+                            <h3 class="card-title py-4 bold" style="font-weight: 700;">{{assignment.subject}}</h3>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-md-6 pt-1 d-flex flex-column align-items-center" style="background-color: #2A1855;">
+                    <div class="p-1 m-1" style="background-color: #2A1855; width: 100%; text-align: left;">
+                        <p class="text-white pt-2 px-2">AI Plagiarism Rate:</p>
+                    </div>
+                    <div class=" m-1" >
+                        <div class="pie hollow three" style="--percentage: {{ assignment.percent_of_cheating_students }}%;">
+                            <span>{{ assignment.percent_of_cheating_students }}%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="container py-4" style="background-color: #2A1855;">
+                        <p class="text-white">Date Created:</p>
+                        <h5 class="text-white">{{assignment.date_created}}</h5>
+                    </div>
+                    <div class="container py-4 my-1" style="background: linear-gradient(180deg, #FD00CC, white);">
+                        <p class="bold" style="color: #2A1855;">Have Any Feedback For Us?</p>
+                        <p style="color: #2A1855;">If you have any suggestions one improving this feature, please contact us.</p>
+                       <a href="mailto:dilreetraju@gmail.com" style ='background-color: #FD00CC;'><button type="button" class="btn btn-primary" style="border: #FD00CC; color: black; background-color: #FD00CC;">Contact Us</button></a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container py-4" style="background-color: #2A1855;">
+                <h3><span class="gradient-text2"> Feedback</span></h3>
+                <p class="text-white">{{assignment.feedback}}</p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+

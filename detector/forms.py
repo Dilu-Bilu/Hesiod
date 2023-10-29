@@ -15,11 +15,32 @@ class TextInputForm(forms.Form):
             'rows': 10,
             'cols': 35,
             'class': 'custom-field border-black',
-            'placeholder': 'Enter the text you want to test for AI/Chatbot plagiarism (minimum 20 words)',
+            'placeholder': 'Enter the text you want to test for AI/Chatbot text (minimum 20 words)',
             'style': 'background-color: #201A31; color: white; font-family: Poppins, sans-serif; font-size: 14px; border-color: white;',
         }),
         label='Text Input:',  # Set the label for the field
     )
+   
+    feedback_input = forms.BooleanField(
+        widget=forms.CheckboxInput(attrs={
+            'class': 'custom-checkbox',
+             }),
+        label='Do you want writing feedback if this is human text?',
+        required=False
+    )
+    grade_level = forms.ChoiceField(
+        choices=[('english_11', 'English 11'),('history_11', 'History 12'), ('history_IB', 'IB History'), ('english_IB', 'IB English'),],
+        required=False,
+        label='What class is this for?'
+        
+        )
+    # rubric items 
+    rubric_field = forms.ChoiceField(
+        choices=[('coherence', 'Coherence'),('WS', 'Writing Structure'), ('Persp', 'Perspecitves'), ('TF', 'Thoughfulness'),],
+        required=False,
+        label='What section of the rubric do you want to evaluate?'
+        
+        )
     file_input = forms.FileField(
         required=False,
         widget=forms.ClearableFileInput(attrs={

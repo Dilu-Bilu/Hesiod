@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .gradient-text {
+      background: linear-gradient(to right, #00ffff, #ff00cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      
+    }
+    
+  </style>
+<style>
+  :root {
+      --background-color-secondary: #231250;
+      
+      }
+ a.two {
+    color: blue;
+    text-decoration: none; /* no underline */
+    display: inline-block;
+    font-size: 12px;
+    background: none;
+    padding: 0px;
+    text-transform: none;
+    text-decoration: none;
+    font-weight: none;
+    margin-top: 0px;
+    color: aqua;
+    letter-spacing: 2px;
+    transition: 0px;
+    }
+  .pie {
+      margin: 6px;
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+  }
+
+  .one {
+      background: conic-gradient(
+          dodgerblue 0% 85%,
+          orangered 25% 85%,
+          limegreen 85% 93%,
+          #f9f000 93%
+      );
+  }
+
+  .two {
+      background: conic-gradient(
+          cornflowerblue 0% 35%,
+          darkorange 35% 57%,
+          greenyellow 57% 85%,
+          #FFFFFF 85%
+      );
+  }
+
+  .three {
+        
+        background: conic-gradient(
+            rgb(46, 255, 23) 0% var(--percentage),
+            #2A1855 var(--percentage)); 
+    } 
+
+  .pie.hollow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .pie.hollow::after {
+      content: '';
+      position: absolute;
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      background-color: #FFFFFF;
+  }
+
+  .pie.two.hollow::after {
+      content: '';
+      position: absolute;
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      background-color: var(--background-color-secondary);
+  }
+
+  .pie.three.hollow::after {
+      content: '';
+      position: absolute;
+      height: 85px;
+      width: 85px;
+      border-radius: 50%;
+      background-color: var(--background-color-secondary);
+  }
+ 
+  .pie.hollow span {
+      font-size: 18pt;
+      z-index: 2;
+      color: white;
+      font-weight: bold;
+      font-family: "JetBrains Mono", sans-serif ;
+  }
+</style>
+
+<div class="text col-md-10 offset-md-1">
+    <!-- <h1 class="text-white text-center py-4 py-md-0" style="font-weight: 700;">Here Are Your <span class="gradient-text"> Assignments</span></h1>  -->
+    
+    
+<!-- <p2 class="text-white text-center" style="font-size: 1.1em;
+color: #fff;
+font-weight: 400;
+max-width: 700px;">Contact us with any inquiries you have about recruitment, feedback, or implementing our product in your school.</p2>
+<div class=" pt-2 text-center">
+    <a href="mailto:dilreetraju@gmail.com" style ='background-color: aqua;'>Email Us</a>
+</div> -->
+
+
+<div class="col-md-12 ">
+    <div class="row pt-5 pt-md-0">
+        <div class="col-md-9 text-start border-sm-end border-white">
+            <div class="row">
+                <div class="col-md-10 d-flex flex-column justify-content-end">
+                    <form action="" method="GET">
+                        <input type="text" class="form-control py-2" id="" name="search-area" placeholder="Find an Assignment...">
+                    </form>
+                </div>
+                <div class="col-md-2 d-flex align-items-start">
+                    <a href="{% url 'assignment-create'%}" style='background-color: aqua;'> <i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+            
+            
+            <div class="container">
+                <hr class="bg-light">
+                {% for Assignment in Assignments %}
+                <style>
+
+                </style>
+                <div class="row">
+                    <div class="container col-md-9 ">
+                        <a class="two"href="{% url 'assignment-detail' Assignment.pk%}"><h5 class="text-info text-uppercase" style="font-size: 26px;">{{Assignment.assignment_title}}</h5></a>
+                        <p class="text-white pt-0 my-1" style="font-size: 14px;">{{Assignment.assignment_description|truncatewords:50|safe}}... <a class="two"href="{% url 'assignment-detail' Assignment.pk%}">Read More</a></p> 
+                        
+                        <div class="row text-left">
+                            <div class="row text">
+                                <i class="fa fa-circle" style="color: #FD00CC;"><p5 class="text-white text-uppercase" style="font-size: 14px;">  {{ Assignment.subject }}</p5></i>
+                            </div>
+                            <p5 class="text-white" style="font-size: 14px;">Created: {{ Assignment.date_created }}</p5>
+                        </div>
+                        
+                       
+                        
+                        
+                    </div>
+                    
+                    <div class="container col-md-3 d-none d-md-block">
+                        <!-- <p1 class="text-white text-start">Percent of AI usage:</p1> -->
+                        <div class="pie hollow three" style="--percentage: {{ Assignment.percent_of_cheating_students }}%;">
+                            <span>{{ Assignment.percent_of_cheating_students }}%</span>
+                        </div>
+    
+                    </div>
+                </div>
+                
+                
+                    <hr class="bg-white">
+                {% endfor %}
+            </div>
+            
+            
+            
+        </div>
+        <style>
+            .h6.sm{
+                font-size: 12px;
+            }
+        </style>
+        <div class="col-md-3 gy-4">
+            <h4 class="text-white text-uppercase text-center">Monthly Analytics</h4>
+            <div class="card rounded mb-3" style="background-color: #FD00CC; color: #231250;">
+                <div class="card-body">
+                    <h6 class="sm card-title">Your Monthly Detections</h6>
+                    <p class="card-text" style="font-size: 32px; font-weight: 800; color: #231250;">{{monthly_detector_usage}}</p>
+                    </div>
+            </div>
+        
+            <div class="card rounded mb-3" style="background-color: #FD00CC; color: #231250;">
+                <div class="card-body">
+                    <h6 class="sm card-title">Writing Feedback Usage</h6>
+                    <p class="card-text" style="font-size: 32px; font-weight: 800; color: #231250;">{{monthly_assignment_usage}}</p>
+                    </div>
+            </div>
+        
+            <div class="card rounded mb-3" style="background-color: #FD00CC; color: #231250;">
+                <div class="card-body">
+                    <h6 class="sm card-title">Assignments Created This Month</h6>
+                    <p class="card-text" style="font-size: 32px; font-weight: 800; color: #231250;"> {{total_assignments_created}}
+                   </p>
+                    </div>
+            </div>
+        
+            <div class="card rounded mb-3" style="background-color: #FD00CC; color: #231250;">
+                <div class="card-body">
+                    <h6 class="sm card-title">Avg. Usage of AI per Assignment</h6>
+                    <p class="card-text" style="font-size: 32px; font-weight: 800; color: #231250;">{{average_assignment_percentage}}%</p>
+                    </div>
+            </div>
+        </div>
+        
+        
+
+        
+    </div>
+</div>
+
+    
+            
+            <!-- <div class="row gy-4">
+              {% for Assignment in Assignments %}
+    <div class="col">
+        <div class="card h-100 text-center d-flex align-items-center" style="padding: 1em; background:  var(--background-color-secondary);">
+            <p1 class="text-white text-start">Percent of AI usage:</p1>
+            <div class="pie hollow three" style="--percentage: {{ Assignment.percent_of_cheating_students }}%;">
+                <span>{{ Assignment.percent_of_cheating_students }}%</span>
+            </div>
+            <div class="card-body">
+                <h4 class="text-white text-center pb-2" style="font-weight: 500;">{{ Assignment.assignment_title }}</h4>
+                <p class="card-text text-start"></p>
+                <a href="{% url 'assignment-detail' Assignment.pk%}">Read More</a>
+            </div>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div>
+    <div class="row row-cols-1 row-cols-lg-3 g-4 py-4">
+    {% endif %}
+{% endfor %} -->
+<script>
+  // No need for the updateChart function anymore
+
+  // Example usage:
+  // If you want to set the chart to 75% filled, you can use the following line:
+  // document.querySelector('.pie.hollow.three').style.setProperty('--percentage', '0.75');
+</script>
+
+</div>
+    
+
+
+{% endblock %}

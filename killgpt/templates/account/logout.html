@@ -5,15 +5,32 @@
 {% block head_title %}{% translate "Sign Out" %}{% endblock %}
 
 {% block inner %}
-<h1>{% translate "Sign Out" %}</h1>
+
 
 <p>{% translate 'Are you sure you want to sign out?' %}</p>
+<style>
+  .gradient-text {
+    background: linear-gradient(to right, #00ffff, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
+<div class="text col-md-8 offset-md-2 text-center">
+  <h1 class="text-white text-center py-4" style="font-weight: 700;">Looking To <span class="gradient-text"> Sign Out?</span></h1> 
+  
+<p2 class="text-white text-center" style="font-size: 1.1em;
+color: #fff;
+font-weight: 400;
+max-width: 700px;">We hope you enjoyed your experience on our website.</p2>
+<div class=" pt-2 text-center">
+  <form method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+    <button class="btn btn-danger" type="submit">{% translate 'Sign Out' %}</button>
+  </form>
+</div>
+</div>
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button class="btn btn-danger" type="submit">{% translate 'Sign Out' %}</button>
-</form>
 {% endblock %}

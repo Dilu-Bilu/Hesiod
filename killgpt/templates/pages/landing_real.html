@@ -10,7 +10,7 @@
     <meta name="description" content="An AI based application that works to limit the power of AI by detecting it. It is catered toward chatGPT and chatbot, but it works for other NLP models as well. We are the best made chatbot detector, and we have a great founder and CEO named Dilreet Raju. He will make this site great and beat all the other competitors in this space.">
     <meta name="author" content="Dilreet Raju">
 
-    <link rel="icon" href="{% static 'images/favicons/logo.jpg' %}">
+    <link rel="icon" href="{% static 'images/logo2.png' %}">
     
     {% block css %}
     <!-- Latest compiled and minified Bootstrap CSS -->
@@ -255,30 +255,32 @@ header .logo
     padding-top: 400px;
 }
 </style>
-<body>
+<body class="">
     <div class="container">
                     <!-- Video Source -->
         <!-- https://www.pexels.com/video/aerial-view-of-beautiful-resort-2169880/ -->
         <section class="showcase">
-            <header>
-            <h2 class="logo">Hesiod</h2>
-            <div class="toggle"></div>
-            </header>
-            <video src="{% static 'images/video.mp4'%}" muted loop autoplay></video>
-            <!-- <img class="img-fluid w-100" src="{% static 'images/python'%}" alt="" style="object-fit: cover;"> -->
-            <div class="overlay"></div>
-            <div class="text">
-            <h2>Integrity Matters.</h2> 
-            <h3>Unleash Originality.</h3>
-            <p>Hesiod is dedicated to the preservation of literature’s essence and furthering self-expression in education. We provide state-of-the-art plagiarism detection solutions, valuing accuracy to avoid false accusations to ensure the integrity of our educational system.</p>
+              <header >
+                <h2 class="logo"><a href="{% url 'landing2'%}" class="text-decoration-none text-reset"><img style='width:24px; height: 24px' src="{% static 'images/logo2.png' %}"> Hesiod</a></h2>
+              <div class="toggle"></div>
+              </header>
+              <video src="{% static 'images/video.mp4'%}" muted loop autoplay></video>
+              <!-- <img class="img-fluid w-100" src="{% static 'images/python'%}" alt="" style="object-fit: cover;"> -->
+              <div class="overlay "></div>
+              <div class="text  pt-5 pt-md-0">
+              <h2 class=" pt-5 pt-md-0">Integrity Matters.</h2> 
+              <h3>Unleash Originality.</h3>
+              <p>Hesiod is dedicated to the preservation of literature’s essence and furthering self-expression in education. We provide state-of-the-art plagiarism detection solutions, valuing accuracy to avoid false accusations to ensure the integrity of our educational system.</p>
+              
+              {% if request.user.is_authenticated %}
+              <a href="{% url 'home' %}">Try It Out</a>
+              {% else %}
+              <a href="{% url 'account_signup' %}">Register To Try It Out</a>
+              {% endif %}
             
-          
-            <a href="{% url 'home' %}">Try It Out</a>
-
-            
-            <a class='glow_button'style="background-color: aqua; margin-left: 1.5%;"href="{% url 'contact' %}">Contact Us</a>
+             <a class='glow_button'style="background-color: aqua; margin-left: 1.5%;"href="{% url 'contact' %}">Contact Us</a>
             </div>
-            <ul class="social">
+            <ul class="social ">
             <!-- <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li> -->
             <li><a target="_blank" href ="https://twitter.com/HesiodAI"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
             <li><a target="_blank" href="https://www.instagram.com/hesiod.ai/"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
@@ -292,16 +294,23 @@ header .logo
     
     
   
-  <div class="menu">
-    <ul>
+    <div class="menu">
+      <ul>
         <li><a href="{% url 'landing2' %}">Home</a></li>
+
+        
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
         <li><a href="{% url 'home' %}">Detector</a></li>
-        <!-- <li><a href="#">Sign Up</a></li>
-        <li><a href="{% url 'account_login' %}">Sign In</a></li> -->
+        <li><a href="{% url 'assignment-list' %}">Assignments</a></li>
+        {% else %}
+        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+      {% endif %}
         <li><a href="{% url 'about' %}">About Us</a></li>
         <li><a href="{% url 'contact' %}">Contact Us</a></li>
     </ul>
-  </div>
+    </div>
   
   <script>
      const menuToggle = document.querySelector('.toggle');

@@ -29,7 +29,7 @@
    font-weight: 800;
    color: #fff;
    line-height: 1em;
-   text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 36px; color: var(--text-color);'>Let's End AI Plagiarism with hesiod.</h2>
+   text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 36px; color: var(--text-color);'>Let's End Wrongful AI Use With Hesiod.</h2>
    {% if output%}
   
    <!-- <style class="">
@@ -104,10 +104,26 @@
         </style>
       </div>
      </div> -->
+     {% if feedback != '' %}
+   <h3 class="display-4 text-center py-3 "style='font-size: 4em;
+   font-weight: 800;
+   color: #fff;
+   line-height: 1em;
+   text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 36px; color: var(--text-color);'>Here Are Some Tips To Improve Your Student's Writing.</h3>
+   <div class="container rounded" style="background: aqua">
+     <div class="m-1 py-5 px-2 text-center">
+        <p class="" style="color: var(--background-color); font-family: Poppins, sans-serif; font-size: 20px;">{{feedback}}</p>
+     </div>
      
+   </div>
+   <hr class="bg-white">
+   {% endif %}
    
      
    {% endif %}
+
+
+   
    
    <form action="" method="POST" class = 'text-white input-lg py-5'enctype="multipart/form-data" style=" background: var(--background-color);">
         
@@ -140,6 +156,26 @@
         });
       });
       </script>
+      <script>
+        // Get references to the checkbox and additional field
+        const checkbox = document.getElementById('id_checkbox_field');
+        const additionalField = document.getElementById('id_additional_field');
+    
+        // Hide the additional field initially
+        additionalField.style.display = 'none';
+    
+        // Add an event listener to the checkbox
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                // If the checkbox is checked, show the additional field
+                additionalField.style.display = 'block';
+            } else {
+                // If the checkbox is unchecked, hide the additional field
+                additionalField.style.display = 'none';
+            }
+        });
+    </script>
+    
       </form>
 
 

@@ -8,7 +8,11 @@ from detector.views import TextInputView, FeedbackCreateView
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
-
+from assignment.views import (
+    AssignmentListView,
+    AssignmentCreateView,
+    AssignmentDetailView,
+)
 class HomeSitemap(Sitemap):
     def items(self):
         return ['home']
@@ -27,8 +31,17 @@ urlpatterns = [
     path(
         "", TemplateView.as_view(template_name="pages/landing_real.html"), name="landing2"
     ),
+    path(
+        "assignment", AssignmentListView.as_view(), name="assignment-list"
+    ),
+    path("assignment/new/", AssignmentCreateView.as_view(), name="assignment-create"),
     path("detector/", TextInputView, name="home"),
     # path("AI/", TextInputView, name='AI'),
+    path(
+        "assignment/<int:pk>/",
+        AssignmentDetailView.as_view(),
+        name="assignment-detail",
+    ),
     path(
         "tos/", TemplateView.as_view(template_name="pages/terms.html"), name="terms"
     ),

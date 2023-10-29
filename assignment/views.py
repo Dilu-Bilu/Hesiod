@@ -1,0 +1,95 @@
+from django.shortcuts import render
+import os
+import requests
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db import models
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from killgpt.users.models import User
+from .models import Assignment
+from django.core.mail import send_mail
+from django.db.models import Avg, F
+from django.db import models
+class AssignmentListView(ListView):
+    model = Assignment
+    context_object_name = "Assignments"
+    template_name = "assignment/assignment_list.html"
+    ordering = ["-date_created"]
+    paginate_by = 8
+    
+    def get_queryset(self):
+        # Get the currently signed-in user
+        user = self.request.user
+
+        # Filter assignments by the currently signed-in user
+        return Assignment.objects.filter(user=user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get the currently signed-in user
+        user = self.request.user
+
+        # Update the context with the monthly detector and assignment usage
+        context['monthly_detector_usage'] = user.monthly_detector_usage
+        context['monthly_assignment_usage'] = user.monthly_assignment_usage
+        context['total_assignments_created'] = user.total_assignments_created
+        context['average_assignment_percentage'] = user.average_assignment_percentage
+   
+        return context
+class AssignmentDetailView(DetailView):
+    model = Assignment
+    template_name = 'assignment/assignment_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .forms import CustomAssignmentForm
+
+class AssignmentCreateView(LoginRequiredMixin, CreateView):
+    model = Assignment
+    form_class = CustomAssignmentForm
+    context_object_name = "Assignment"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        result = super().form_valid(form)
+
+        # Call the update_user_fields method to update user-related fields
+        self.object.update_user_fields()
+
+        return result
+
+    def get_success_url(self):
+        return reverse('assignment-detail', kwargs={'pk': self.object.pk})
+
+class AssignmentUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
+    model = Assignment
+    fields = ["title", "content"]
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        Assignments = self.get_object()
+        if self.request.user == Assignments.user:
+            return True
+        return False
+
+
+class AssignmentDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    model = Assignment
+    context_object_name = "Assignment"
+    success_url = "/"
+
+    def test_func(self):
+        Assignments = self.get_object()
+        if self.request.user == Assignments.user:
+            return True
+        return False
