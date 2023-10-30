@@ -20,6 +20,6 @@ class CustomAssignmentForm(forms.ModelForm):
             'has_ai_component': forms.CheckboxInput(attrs={'class': 'custom-checkbox'}),
             'is_collaborative': forms.CheckboxInput(attrs={'class': 'custom-checkbox'}),
             'assignment_type': forms.Select(attrs={'class': 'custom-form-field'}),
-            'subject': forms.TextInput(attrs={'class': 'custom-form-field'}),
+            'subject': forms.Select(attrs={'class': 'custom-form-field'}),
             'percent_of_cheating_students': forms.NumberInput(attrs={'class': 'custom-form-field'}),
         }

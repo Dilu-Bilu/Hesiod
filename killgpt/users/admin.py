@@ -7,7 +7,6 @@ from killgpt.users.forms import UserAdminChangeForm, UserAdminCreationForm
 
 User = get_user_model()
 
-
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
 
@@ -16,6 +15,19 @@ class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         (_("Personal info"), {"fields": ("name", "email")}),
+        (
+            _("Assignment and Detector Usage"),
+            {
+                "fields": (
+                    "lifetime_assignment_usage",
+                    "monthly_assignment_usage",
+                    "lifetime_detector_usage",
+                    "monthly_detector_usage",
+                    "total_assignments_created",
+                    "average_assignment_percentage",
+                ),
+            },
+        ),
         (
             _("Permissions"),
             {
