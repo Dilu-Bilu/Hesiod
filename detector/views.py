@@ -188,8 +188,8 @@ def process_file(file):
 
 
 def count_word_segments(text):
-    # Define the list of word segments you want to count
-    word_segments_to_count = ["zi", "conclusion", "iv", "tuna", "gran", "summary", "overall", "tation", "levi", "hema"]
+    # Define the list of word segments you want to count # removed iv
+    word_segments_to_count = ["zi", "conclusion", "tuna", "gran", "summary", "overall", "tation", "levi", "hema"]
     word_segments_to_count_human = ["aus","involves", "ignoring", "focuses", "substantially", "explores", "ibility","psi", "proposes","departing"]
     # Initialize an empty dictionary to store the word segment counts
     word_segment_count = {segment: 0 for segment in word_segments_to_count}
@@ -215,7 +215,7 @@ def count_word_segments(text):
     for item in word_segment_count.values():
         humanity_score -= (item) * 0.25
     for item in word_segment_count_human.values():
-        humanity_score += (item) * 0.25
+        humanity_score += (item) * 0.35
     return humanity_score
 
 import openai

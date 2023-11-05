@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 {% load bootstrap_icons %}
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     .form-container {
       width: 25%;
@@ -12,7 +13,28 @@
     :root {
       --background-color: #231250;
       --text-color: white;
+
     }
+    .card {
+      background-color: var(--background-color);
+      border: none;
+  }
+
+    .progress {
+        margin-bottom: 10px; /* Adjust the margin to create spacing between graphs */
+    }
+    table {
+            border: 1px solid white;
+            width: 100%;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        th, td {
+            border: 1px solid white;
+            text-align: left;
+            padding: 10px;
+        }
     </style>
        <link rel="preconnect" href="https://fonts.googleapis.com">
        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +52,11 @@
    color: #fff;
    line-height: 1em;
    text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 36px; color: var(--text-color);'>Let's End Wrongful AI Use With Hesiod.</h2>
+
+
+
+
+
    {% if output%}
   
    <!-- <style class="">
@@ -105,7 +132,7 @@
       </div>
      </div> -->
      {% if feedback != '' %}
-   <h3 class="display-4 text-center py-3 "style='font-size: 4em;
+   <!-- <h3 class="display-4 text-center py-3 "style='font-size: 4em;
    font-weight: 800;
    color: #fff;
    line-height: 1em;
@@ -115,7 +142,69 @@
         <p class="" style="color: var(--background-color); font-family: Poppins, sans-serif; font-size: 20px;">{{feedback}}</p>
      </div>
      
-   </div>
+   </div> -->
+   <div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: var(--text-color);">Bar Graphs</h5>
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 33%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 66%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 33%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="container" style="font-size: 12px;">
+                      <div class="row">
+                        <div class="col text-white"><i class="fa fa-circle pe-1" style="color: blue;"></i>Coherence</div>
+                        <div class="col text-white"><i class="fa fa-circle pe-1" style="color: green;"></i>Writing Structure</div>
+                      </div>
+                      <div class="row">
+                        <div class="col text-white"><i class="fa fa-circle pe-1" style="color: red;"></i>Perspective</div>
+                        <div class="col text-white"><i class="fa fa-circle pe-1" style="color: yellow;"></i>Thoughfulness</div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+ <hr class="bg-white">
+ <div class="container">
+  <div class="row">
+      <div class="col-md-6 offset-md-3">
+          <table>
+              <tr>
+                  <th>Criteria</th>
+                  <th>Comments</th>
+              </tr>
+              <tr>
+                  <td>Coherence</td>
+                  <td>Improving the flow of your essay by using transition words and organizing your ideas more logically would enhance the coherence of your writing.</td>
+              </tr>
+              <tr>
+                  <td>Writing Structure</td>
+                  <td>Your essay could benefit from a clearer structure, such as an introduction, body paragraphs with topic sentences, and a conclusion to better guide your readers through your arguments.</td>
+              </tr>
+              <tr>
+                  <td>Perspective</td>
+                  <td>Consider incorporating different viewpoints or analyzing the topic from a broader perspective to make your essay more insightful and engaging.</td>
+              </tr>
+              <tr>
+                  <td>Thoughtfulness</td>
+                  <td>Your essay would be more thoughtful by delving deeper into the subject matter, offering critical analysis, and providing more context and evidence to support your arguments.</td>
+              </tr>
+          </table>
+      </div>
+  </div>
+</div>
    <hr class="bg-white">
    {% endif %}
    

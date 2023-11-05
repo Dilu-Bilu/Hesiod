@@ -21,7 +21,7 @@
   line-height: 1em;
   text-transform: uppercase;font-family: Poppins, sans-serif; text-transform: uppercase; font-size: 40px; color: white;'>Sign In</h2> -->
 
-<h1 class="card-title text-center py-4"><span class="px-1 pb-1" style="background-color: aqua; color: #231250">Sign Up</span></h1>
+<h1 class="card-title text-center py-4"><span class="px-1 pb-1" style="background-color: aqua; color: #231250">Sign In</span></h1>
   <!-- <img class="w-20"src="{% static 'images/signup_photo.jpg'%}" alt="" > -->
 
 {% get_providers as socialaccount_providers %}
@@ -32,7 +32,7 @@
     {% translate "Please sign in with one of your existing third party accounts:" %}
     {% if ACCOUNT_ALLOW_REGISTRATION %}
       {% blocktranslate trimmed %}
-        Or, <a href="{{ signup_url }}">sign up</a>
+        Or, <a href="{{ signup_url }}">Sign In</a>
         for a {{ site_name }} account and sign in below:
       {% endblocktranslate %}
     {% endif %}
@@ -56,7 +56,7 @@
       {% blocktranslate trimmed %}
         If you have not created an account yet, then please
         <a href="{{ signup_url }}">sign up</a> first.
-        Please sign in to your account before accessing the proprietary detector.
+        Please sign in to your account before accessing Hesiod's software.
       {% endblocktranslate %}
     </p>
   {% endif %}

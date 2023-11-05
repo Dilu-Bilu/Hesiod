@@ -51,13 +51,38 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import CustomAssignmentForm
 
+from django.core.exceptions import PermissionDenied
+from datetime import datetime
+
 class AssignmentCreateView(LoginRequiredMixin, CreateView):
     model = Assignment
     form_class = CustomAssignmentForm
     context_object_name = "Assignment"
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        # Get the user
+        user = self.request.user
+
+        # Check the monthly usage limit (e.g., 10 assignments per month)
+        now = datetime.now()
+        current_month = now.month
+
+        # Calculate the user's monthly usage for assignments
+        user_monthly_usage = user.monthly_assignment_usage
+        if user.last_assignment_usage_update:
+            if user.last_assignment_usage_update.month != current_month:
+                user_monthly_usage = 1
+            else:
+                user_monthly_usage += 1
+
+        # Define the monthly usage limit
+        monthly_limit = 10
+
+        if user_monthly_usage > monthly_limit:
+            # If the usage limit is exceeded, raise a PermissionDenied exception
+            raise PermissionDenied("Monthly assignment usage limit exceeded")
+
+        form.instance.user = user
         result = super().form_valid(form)
 
         # Call the update_user_fields method to update user-related fields
@@ -67,6 +92,7 @@ class AssignmentCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('assignment-detail', kwargs={'pk': self.object.pk})
+
 
 class AssignmentUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Assignment
