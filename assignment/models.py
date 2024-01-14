@@ -20,13 +20,11 @@ class Assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     assignment_title = models.CharField(max_length=100, null=True)
     assignment_description = models.TextField(null=True)
-    learning_objectives = models.TextField(null=True)
-    has_ai_component = models.BooleanField(null=True)
-    is_collaborative = models.BooleanField(null=True)
+    assignment_criteria = models.TextField(null=True)
+    total_marks = models.IntegerField(null=True)
     date_created = models.DateTimeField(default=timezone.now)
-    assignment_type = models.CharField(max_length=20, choices=ASSIGNMENT_TYPES, null=True)
     subject = models.CharField(max_length=20, choices=SUBJECT_TYPES, null=True)  # Replace with your model
-    percent_of_cheating_students = models.IntegerField(null=True)
+    percent_of_cheating_students = models.IntegerField(null=True, default=0)
     feedback = models.TextField(blank=True)  # New field for storing feedback
 
         
@@ -43,22 +41,23 @@ class Assignment(models.Model):
         if created:
             # If this is a new assignment, update the related user's fields
             self.update_user_fields()
-        if not self.pk:  # Only generate feedback if the assignment is being created
-            try: 
-                input_text = f"Assignment: {self.title}\nDescription: {self.assignment_description}\n"  # Add other details
+        ###### The FEATURE FOR ASSIGNMENT FEEDBACK IS DISABLED 
+        # if not self.pk:  # Only generate feedback if the assignment is being created
+        #     try: 
+        #         input_text = f"Assignment: {self.title}\nDescription: {self.assignment_description}\n"  # Add other details
                 
-                openai.api_key = "YOUR_OPENAI_API_KEY"
-                response = openai.Completion.create(
-                    engine="text-davinci-003",
-                    prompt=input_text,
-                    temperature=0.7,
-                    max_tokens=150,
-                    stop=None
-                )
+        #         openai.api_key = "YOUR_OPENAI_API_KEY"
+        #         response = openai.Completion.create(
+        #             engine="text-davinci-003",
+        #             prompt=input_text,
+        #             temperature=0.7,
+        #             max_tokens=150,
+        #             stop=None
+        #         )
                 
-                self.feedback = response.choices[0].text.strip()
-            except:
-                self.feedback = 'Here is some feedback as the main OpenAI plugin is not yet created or implemented yet.'
+        #         self.feedback = response.choices[0].text.strip()
+        #     except:
+        #         self.feedback = 'Here is some feedback as the main OpenAI plugin is not yet created or implemented yet.'
         super().save(*args, **kwargs)
 
     def __str__(self):

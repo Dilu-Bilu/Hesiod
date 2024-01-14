@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+  <div class="text-white pt-0 pb-4 ">
+    <p class="text-white">
+        STEP 1 OF 3
+    </p>
+    <h3 class="" style="font-size: 2em;">Create a password to start your membership</h3>
+    <h5 class="uppercase" style="font-size: 1em; color: magenta;">Just a few more steps and you're done!
+        We hate paperwork, too.</h5>
+  </div>
+  
+  
+  <form method="post">
+  <div class="row d-flex align-items-center">
+   
+  </div>
+  <div class="row d-flex align-items-center pt-2 text-white">
+    <div class="col-md-12 ">
+        
+            {% csrf_token %}
+            {{ form.email }}
+            <div class="pt-2">
+                {{ form.password }}
+            </div>
+         
+           
+    </div>
+  </div>
+  <div class="row d-flex align-items-center pt-2">
+    <div class="col-md-12 ">
+        <div class="form-group form-check text-white">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label ps-2" for="exampleCheck1">Please do not email me Hesiod special offers.</label>
+          </div>
+    </div>
+  </div>
+ <a href="{% url 'step-2'%}" style="text-decoration: none;">
+    <div class="row align-items-center pt-2">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: magenta; font-size: 24px; color: #231250;">
+                Next
+            </button>
+        </div>
+    </div>
+ 
+</form>
+ </a> 
+  
+  
+
+  
+
+  <style>
+    /* Custom styles for the links */
+    .custom-link {
+      display: inline-block;
+      padding: 25% 25%;
+      text-decoration: none;
+      color: #231250;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 2em;
+      letter-spacing: 2px;
+      transition: all 0.2s ease; /* Updated transition for all properties */
+    }
+
+    .custom-link:hover {
+      letter-spacing: 6px;
+      box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.7); /* White glow effect */
+    }
+
+    /* Colors for the links */
+    .aqua-bg {
+      background-color: aqua;
+    }
+    .magenta-bg {
+      background-color: magenta;
+    }
+  </style>
+
+
+
+</div>
+
+  
+
+
+</div>
+
+{% endblock content %}

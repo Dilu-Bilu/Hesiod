@@ -2,7 +2,7 @@
 Base settings to build other settings files upon.
 """
 from pathlib import Path
-
+import os
 import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
@@ -80,6 +80,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     'django_bootstrap_icons',
     'sslserver',
+    "djstripe",
 ]
 
 LOCAL_APPS = [
@@ -260,7 +261,17 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "djstripe_id"
 
+
+STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY")
+OPEN_AI_KEY = os.environ.get("OPEN_AI_KEY")
+
+STRIPE_LIVE_MODE = False
+# Needed for webhooks, which are discussed later in the guide.
+DJSTRIPE_WEBHOOK_SECRET = os.environ.get("DJSTRIPE_WEBHOOK_SECRET", "whsec_xxx")
 # django-allauth
 # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)

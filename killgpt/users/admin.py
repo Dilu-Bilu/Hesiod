@@ -25,8 +25,11 @@ class UserAdmin(auth_admin.UserAdmin):
                     "monthly_detector_usage",
                     "total_assignments_created",
                     "average_assignment_percentage",
+                    "subscription",
+                    "customer",
                 ),
             },
+           
         ),
         (
             _("Permissions"),

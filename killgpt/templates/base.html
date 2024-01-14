@@ -85,6 +85,7 @@
 
         
         {% if request.user.is_authenticated %}
+        <li><a href="{% url 'users:detail' request.user.email %}">Account</a></li>
         <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
         <li><a href="{% url 'home' %}">Detector</a></li>
         <li><a href="{% url 'assignment-list' %}">Assignments</a></li>

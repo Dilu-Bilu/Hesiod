@@ -22,7 +22,22 @@ class User(AbstractUser):
     last_detector_usage_update = models.DateTimeField(null=True)  # Last detector usage update timestamp
     total_assignments_created = models.PositiveIntegerField(default=0)  # Total number of assignments created
     average_assignment_percentage = models.FloatField(default=0.0)  # Average percentage of all assignments
-
+    subscription = models.ForeignKey(
+        'djstripe.Subscription', null=True, blank=True, on_delete=models.SET_NULL,
+        help_text="The user's Stripe Subscription object, if it exists"
+    )
+    customer = models.ForeignKey(
+        'djstripe.Customer', null=True, blank=True, on_delete=models.SET_NULL,
+        help_text="The user's Stripe Customer object, if it exists"
+    )    
+    # subscription = models.ForeignKey(
+    #     'djstripe.Subscription', null=True, blank=True, on_delete=models.SET_NULL,
+    #     help_text="The user's Stripe Subscription object, if it exists"
+    # )
+    # customer = models.ForeignKey(
+    #     'djstripe.Customer', null=True, blank=True, on_delete=models.SET_NULL,
+    #     help_text="The user's Stripe Customer object, if it exists"
+    # )    
     def get_absolute_url(self):
         """Get URL for user's detail view."""
         return reverse("users:detail", kwargs={"username": self.username})

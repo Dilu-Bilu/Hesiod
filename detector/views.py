@@ -17,7 +17,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 import math 
 from killgpt.users.models import User
-
+from assignment.models import Assignment
 class AbstractLanguageChecker():
     def __init__(self):
         self.device = torch.device(
@@ -189,7 +189,7 @@ def process_file(file):
 
 def count_word_segments(text):
     # Define the list of word segments you want to count # removed iv
-    word_segments_to_count = ["zi", "conclusion", "tuna", "gran", "summary", "overall", "tation", "levi", "hema"]
+    word_segments_to_count = ["iv", "zi", "conclusion", "tuna", "gran", "summary", "overall", "tation", "levi", "hema"]
     word_segments_to_count_human = ["aus","involves", "ignoring", "focuses", "substantially", "explores", "ibility","psi", "proposes","departing"]
     # Initialize an empty dictionary to store the word segment counts
     word_segment_count = {segment: 0 for segment in word_segments_to_count}
@@ -218,90 +218,103 @@ def count_word_segments(text):
         humanity_score += (item) * 0.35
     return humanity_score
 
-import openai
+from openai import OpenAI
+import re
+from config.settings.base import OPEN_AI_KEY
+def get_feedback(total_marks, assignment_prompt, rubric_criteria, student_writing):
+    
+    client = OpenAI(api_key=OPEN_AI_KEY)
+    completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+    {"role": "system", "content": "You are a teaching assistant, skilled in marking your student's english/history writings with brutal honesty white giving them feedback of how they can improve their writing in each criteria through using examples from their writing and showing how they can be improved. Also you mark very hard and are often too hard at marking."},
+    {"role": "user", "content": f"""Task: Evaluate a student's writing based on an assignment prompt, rubric criteria, and provide constructive feedback with overall advice and direct sentence examples of how improvements cuold be made by using example sentences inside the student's work. 
 
-def get_feedback(text_input, subject, criteria):
-    # Set your OpenAI API key here
-    try:
-        openai.api_key = "sk-b7vKNqgW4TgBYVcF6V3K3B|bkFJ7jXtZUwq961We57GAs5m"
-
-        prompt = f"propose detailed feedback about the {criteria} for the following {subject} text: {text_input}"
+        Assignment Marks: 
+        This is the amount of marks the assignment is out of, represented as (yourmarks)/{total_marks}
         
-        response = openai.Completion.create(
-            engine="text-davinci-003",  # You can also try "davinci-codex" for more code-related feedback
-            prompt=prompt,
-            temperature=0.7,
-            max_tokens=150,
-            stop=None
+        Assignment Marks: {total_marks}    
+
+        Assignment Prompt:
+        Please replace the following section with the assignment prompt for this evaluation. Describe the assignment topic, requirements, and any specific guidelines for the student's writing. Ensure it is clear and comprehensive.
+
+        Assignment Prompt: {assignment_prompt}
+
+        Rubric Criteria:
+        Replace the following section with the rubric criteria to be used for assessing the student's writing. Include criteria descriptions, point allocations, and the total marks possible. Ensure each criterion is distinct and understandable.
+
+        Rubric Criteria: {rubric_criteria}
+
+        Student's Writing:
+        Replace the subsequent section with the actual content of the student's writing. Ensure it aligns with the assignment prompt and will be used for assessment based on the provided rubric.
+
+        Student's Writing: {student_writing}
+
+        Expected Output:
+
+        Marks: The response should include the total marks attained out of the total marks available.
+        Criterion Feedback: Feedback for each individual criterion outlined in the rubric. This should encompass strengths, areas for improvement, and specific comments based on the student's writing.
+        General Advice: Provide overall advice for the student's improvement, supported by quoted examples from their writing. Identify common issues or patterns observed and suggest ways to enhance the quality of their writing.
+        Please ensure the output is presented in a structured and readable format, allowing easy parsing of the marks, feedback, and general advice for further analysis and understanding.
+        """}
+        ]
         )
-        output = response.choices[0].text.strip()
-    except: 
-        output = """Improving your students' writing skills involves a combination of strategies, practice, and feedback. Here are some ways to help your student improve their writing:
+    def prettify_for_html(string_with_newlines):
+        # Replace '\n' with HTML line break tags '<br>'
+        prettified_string = string_with_newlines.replace('\n', '<br>')
+        return prettified_string
+    response = completion.choices[0].message
+    txt = response.content
 
-1. **Provide Clear Instructions**: Ensure that your student understands the writing task and any specific requirements or guidelines.
+    # Extract marks
+    marks = re.search(r"(\d+/\d+)", txt)
+    if marks:
+        marks = marks.group(1)  # Extract only the matched marks
+    else:
+        marks = None
 
-2. **Teach the Writing Process**:
-   - **Pre-writing**: Encourage brainstorming, outlining, and organizing ideas before writing.
-   - **Drafting**: Emphasize getting thoughts on paper without worrying too much about perfection.
-   - **Revising**: Teach the importance of revising for content, clarity, and coherence.
-   - **Editing and Proofreading**: Show how to check for grammar, punctuation, and spelling errors.
+    # Extract feedback
+    feedback = re.findall(r"Criterion Feedback:(.+?)General Advice:", txt, re.DOTALL)
+    if feedback:
+        feedback = feedback[0]
+    else:
+        feedback = None
 
-3. **Offer Feedback**: Provide constructive feedback on their writing, focusing on both strengths and areas for improvement. Encourage them to revise based on your comments.
-
-4. **Read Regularly**: Reading diverse materials, including books, articles, and essays, can improve vocabulary, comprehension, and writing style.
-
-5. **Writing Prompts**: Use writing prompts or creative exercises to stimulate their creativity and writing skills.
-
-6. **Grammar and Style**: Teach grammar rules, sentence structure, and writing style. Encourage them to use varied sentence structures and precise language.
-
-7. **Expand Vocabulary**: Encourage vocabulary development by introducing new words and phrases regularly.
-
-8. **Peer Review**: Have students review and critique each other's work, fostering collaboration and helping them identify common issues.
-
-9. **Provide Examples**: Share well-written essays, stories, or articles as examples to illustrate effective writing.
-
-10. **Encourage Reading Aloud**: Reading their work aloud helps identify awkward phrasing and errors.
-
-11. **Writing Workshops**: Organize writing workshops or writing clubs where students can share and critique each other's work.
-
-12. **Use Technology**: Utilize writing tools or software that highlight grammar and spelling errors.
-
-13. **Set Writing Goals**: Encourage students to set specific, achievable writing goals.
-
-14. **Writing Challenges**: Assign writing challenges or topics that push them out of their comfort zones.
-
-15. **Keep a Journal**: Encourage them to keep a daily journal or diary, which can help improve writing fluency.
-
-16. **Citation and References**: Teach them the importance of proper citation and referencing when using sources.
-
-17. **Practice Regularly**: Writing is a skill that improves with practice. Encourage them to write regularly, even if it's just for personal enjoyment.
-
-18. **Celebrate Achievements**: Acknowledge and celebrate their writing achievements and progress.
-
-19. **Set a Good Example**: Be a model of good writing in your own communication.
-
-20. **Individualized Support**: Recognize that each student may have different needs and areas for improvement. Provide individualized support when necessary.
-
-Remember that improvement takes time, and students may need ongoing support and practice to enhance their writing skills. Provide a nurturing and encouraging environment that fosters creativity and self-expression.
-"""
-       
-    return output 
+    # Extract general advice
+    gen_advice = re.findall(r"General Advice:(.*)", txt, re.DOTALL)
+    if gen_advice:
+        gen_advice = gen_advice[0]
+    else:
+        gen_advice = None
+    marks_display = marks.split('/')
+    top = int(marks_display[0])
+    bot = int(marks_display[1])
+    display_mark = top/bot
+    return marks, feedback, gen_advice, display_mark
 
 # Only signed in users can go onto the detector 
 # @user_passes_test(lambda u: u.is_authenticated, login_url='/accounts/login/')
 def TextInputView(request):
-    # Load the user's input 
-    user = request.user
-    form = TextInputForm()
+     # Retrieve the user object from the request or context
+    user = request.user if request.user.is_authenticated else None
     if request.method == 'POST':
-        form = TextInputForm(request.POST, request.FILES)
+        form = TextInputForm(user, request.POST, request.FILES)
         if form.is_valid():
             initial = time.time()
             text_input = form.cleaned_data['text_input']
             file_input = form.cleaned_data['file_input']
             feedback_input = form.cleaned_data['feedback_input']
-            subject = form.cleaned_data['grade_level']
-            criteria = form.cleaned_data['rubric_field']
+            
+            # Accessing the feedback_choice value from the submitted form
+            feedback_choice = form.cleaned_data['feedback_choice']
+            # Get the Feedback object based on the selected feedback_choice (assuming Feedback is related to the Assignment model)
+            feedback = Assignment.objects.get(pk=feedback_choice)
+            #total_marks, assignment_prompt, rubric_criteria, student_writing
+            total_marks = feedback.total_marks
+            assignment_prompt = feedback.assignment_description
+            rubric_criteria = feedback.assignment_criteria
+            
+
             # validate the file's content
             if file_input:
                 try:
@@ -311,9 +324,9 @@ def TextInputView(request):
                     return render(request, 'pages/home.html', context)
             else:
                 input_text = text_input
-            feedback_words = text_input
+           
             
-          
+            student_writing = input_text
             # Limit the word count 
             words = input_text.split()
             limited_words = words[:650]
@@ -341,7 +354,7 @@ def TextInputView(request):
                     user.update_lifetime_assignment_usage()  # Increment lifetime usage
                     user.update_monthly_assignment_usage()  # Update monthly usage
                     user.save()
-                    feedback = get_feedback(feedback_words, subject, criteria)
+                    marks, feedback, gen_advice, display_mark = get_feedback(total_marks, assignment_prompt, rubric_criteria, student_writing)
             else: 
                 decision = "This text is AI generated."
             percent = percent_certainty(score)
@@ -349,10 +362,14 @@ def TextInputView(request):
             user.update_lifetime_detector_usage()  # Increment lifetime usage
             user.update_monthly_detector_usage()  # Update monthly usage
             user.save()
-            context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text, 'feedback': feedback}
+            if feedback_input == True:
+                context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text, 'marks': marks, 'gen_advice': gen_advice, 'feedback': feedback, 'display_mark': display_mark}
+            else:
+                context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text,}
         else:
             context = {'form': form}
     else:
+        form = TextInputForm(user)
         context = {'form': form}
     
     return render(request, 'pages/home.html', context)

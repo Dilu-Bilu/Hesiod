@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="text-white text-center col-md-4 offset-md-4">
+    <span class="stepLogo planStepLogo">
+        <span class="stepLogo paymentStepLogo">
+            <svg xmlns="http://www.w3.org/2000/svg" style="color: magenta;" width="64" height="64" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="16" stroke="currentColor" stroke-width="2" fill="none"/>
+                
+                <path fill="none" stroke="magenta" stroke-width="2" d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="magenta" stroke-width="2" fill="none"/>
+            </svg>
+        </span>
+        
+        
+    </span>
+    <div class="planContainer" data-uia="plan-context-page-container">
+        <div class="stepLogoContainer"><span class="stepLogo planStepLogo"></span></div>
+        <div class="stepHeader-container" data-uia="header">
+          <div class="stepHeader pt-3 " role="status">
+            <span id="" class="stepIndicator" data-uia="">STEP <b>3</b> OF <b>3</b></span>
+            <h1 class="stepTitle pb-3" data-uia="stepTitle">Choose how to pay</h1>
+          </div>
+        </div>
+        <h4 style="font-size: 1em; font-weight: 300;" class="text-white">Your payment is encrypted and you can change how you pay anytime.
+            </h4>        
+            <h4 style="font-size: 1em; font-weight: bold; color: magenta;" class="">Secure for peace of mind.
+            </h4>        
+            <h4 style="font-size: 1em; font-weight: bold; color: magenta;"  class="">Cancel easily online.
+            </h4>        
+           
+    </div>  
+</div>
+
+<div class="col-md-4 offset-md-4">
+    
+    <div class="row d-flex align-items-center">
+        <div class="col-md-12 ">
+            <a href="{% url 'step-2.5'%}" style="text-decoration: none;">
+                <div class="row align-items-center pt-2">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-lg w-100 p-0  text-white align-items-center" style="background-color: #231250; border-color: magenta; font-size: 14px; color: #231250;">
+                            <div class="row py-4 px-2">
+                                <div class="col-10 d-flex align-items-center">
+                                    <div class="col-6 ps-0">Credit or Debit Card</div>
+                                    <div class="col-2"><img src="{% static 'images/VISA.png' %}"></div>
+                                    <div class="col-2"><img src="{% static 'images/AMEX.png' %}"></div>
+                                    <div class="col-2"><img src="{% static 'images/MASTERCARD.png' %}"></div>
+                                
+                                     
+                                </div>
+                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-mirrorinrtl="true" class="default-ltr-cache-4z3qvp e1svuwfo1" data-name="ChevronRight" aria-hidden="true">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5859 12L8.29303 19.2928L9.70725 20.7071L17.7072 12.7071C17.8948 12.5195 18.0001 12.2652 18.0001 12C18.0001 11.7347 17.8948 11.4804 17.7072 11.2928L9.70724 3.29285L8.29303 4.70706L15.5859 12Z" fill="currentColor"></path>
+                                      </svg>
+                                </div>
+                              </div>
+                        </button>
+                    </div>
+                </div>
+             </a> 
+        </div>
+      </div>
+      <div class="col-md-12 ">
+        <a href="{% url 'step-2.5'%}" style="text-decoration: none;">
+            <div class="row align-items-center pt-2">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-lg w-100 p-0  text-white align-items-center" style="background-color: #231250; border-color: magenta; font-size: 14px; color: #231250;">
+                        <div class="row py-4 px-2">
+                            <div class="col-10 d-flex align-items-center">
+                                <div class="col-2">PayPal</div>
+                                <div class="col-4"><img style="height: 30px; width: 50px;" src="{% static 'images/download.png' %}"></div>
+                            </div>
+                            <div class="col-2 d-flex justify-content-end align-items-center">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-mirrorinrtl="true" class="default-ltr-cache-4z3qvp e1svuwfo1" data-name="ChevronRight" aria-hidden="true">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5859 12L8.29303 19.2928L9.70725 20.7071L17.7072 12.7071C17.8948 12.5195 18.0001 12.2652 18.0001 12C18.0001 11.7347 17.8948 11.4804 17.7072 11.2928L9.70724 3.29285L8.29303 4.70706L15.5859 12Z" fill="currentColor"></path>
+                                  </svg>
+                            </div>
+                          </div>
+                    </button>
+                </div>
+            </div>
+         </a> 
+    </div>
+
+    <section>
+        <p class="title">Pricing Plans</p>
+        <div class="columns">
+          {% for product in products %}
+            <div class="column">
+              <p class="subtitle">{{ product.name }}</p>
+              {% for plan in product.plan_set.all %}
+                <div>
+                  <p class="heading">{{ plan.nickname }}</p>
+                  <p>{{ plan.human_readable_price }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+</div>
+<script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+<stripe-pricing-table pricing-table-id="prctbl_1OSn9dBsAD5ZNWYHVehuoh9i"
+publishable-key="pk_test_51NKRn9BsAD5ZNWYHWPyEOE9dGRwsMKJ0UZ0FhzXP1g0pFxGQlyoZfwoG63Z5xkTvVt2749dSTdoBdcQWVya2yKqs00RSROiTUm">
+</stripe-pricing-table>
+{% endblock content %}

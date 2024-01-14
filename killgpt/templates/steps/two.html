@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="text-white text-center col-md-6 offset-md-3">
+    <span class="stepLogo planStepLogo">
+        <svg xmlns="http://www.w3.org/2000/svg" style="color: magenta;" width="48" height="48"  viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M9.5 12.5l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </span>
+    <div class="planContainer" data-uia="plan-context-page-container">
+        <div class="stepLogoContainer"><span class="stepLogo planStepLogo"></span></div>
+        <div class="stepHeader-container" data-uia="header">
+          <div class="stepHeader pt-3 " role="status">
+            <span id="" class="stepIndicator" data-uia="">STEP <b>2</b> OF <b>3</b></span>
+            <h1 class="stepTitle pb-4" data-uia="stepTitle">Choose your plan.</h1>
+          </div>
+        </div>
+        <div class="col-md-8 offset-md-2 text-start">
+            <div class="row py-3">
+                <div class="col-1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark-group--icon default-ltr-cache-4z3qvp e1svuwfo1" style="color: magenta;" data-name="Checkmark" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z" fill="currentColor"></path>
+                      </svg>
+                </div>
+                <div class="col-11 ">
+                    <span class="checkmark-group--text" data-uia="checkmark-group+row-0+content">No commitments, cancel anytime.</span>
+                </div>
+            </div> 
+              
+            <div class="row py-3">
+                <div class="col-1 ">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark-group--icon default-ltr-cache-4z3qvp e1svuwfo1" style="color: magenta;" data-name="Checkmark" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z" fill="currentColor"></path>
+                      </svg>
+                </div>
+                <div class="col-11 ">
+                    <span class="checkmark-group--text" data-uia="checkmark-group+row-0+content">Unlimited Access to Our Detector and Assignment Marker.</span>
+                </div>
+            </div> 
+            <div class="row py-3">
+                <div class="col-1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark-group--icon default-ltr-cache-4z3qvp e1svuwfo1" style="color: magenta;" data-name="Checkmark" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z" fill="currentColor"></path>
+                      </svg>
+                </div>
+                <div class="col-11">
+                    <span class="checkmark-group--text" data-uia="checkmark-group+row-0+content">Secure Payment.</span>
+                </div>
+            </div> 
+        </div>
+
+      </div>
+</div>
+
+<div class="col-md-4 offset-md-4">
+    
+ <a href="{% url 'step-2.5'%}" style="text-decoration: none;">
+    <div class="row align-items-center pt-2">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: magenta; font-size: 24px; color: #231250;">
+                Next
+            </button>
+        </div>
+    </div>
+ </a> 
+
+</div>
+
+{% endblock content %}

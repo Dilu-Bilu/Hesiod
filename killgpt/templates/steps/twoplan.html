@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #231250;
+        color: white;
+    }
+    .planHeader {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .checkmark-group--icon {
+        fill: magenta;
+        margin-right: 10px;
+    }
+    .checkmark-group--text {
+        color: white;
+        margin-bottom: 10px;
+    }
+    .planGrid__cell {
+        color: white;
+    }
+    .nf-btn-primary {
+        background-color: #ff00ff;
+        border-color: magenta;
+    }
+    .options {
+        color: #231250;
+    }
+</style>
+<body>
+    <div class="text-white pt-5">
+        
+        <div class="planContainer" data-uia="plan-context-page-container">
+            <div class="stepLogoContainer"><span class="stepLogo planStepLogo"></span></div>
+            <div class="stepHeader-container" data-uia="header">
+              <div class="stepHeader pt-3 " role="status">
+                <span id="" class="stepIndicator" data-uia="">STEP <b>3</b> OF <b>3</b></span>
+                <h1 class="stepTitle pb-4" data-uia="stepTitle">Choose your plan.</h1>
+              </div>
+            </div>
+            
+    </div>
+<!-- <div class="col">
+    <div class="row justify-content-center text-center  pt-3 pb-4 align-items-center">
+        <div class="col-md-2  pb-lg-0">
+            Plans
+        </div>
+        <div class="col-md-10 ">
+            <div class="row justify-content-end">
+                <div class="col-lg-3  col-4">
+                    <div class=" text-center bg-magenta py-lg-5 py-4 options" style="background-color: magenta; color: #231250;">Standard</div>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <div class="  bg-magenta text-center options py-lg-5" style="background-color: magenta; color: #231250;">Alpha Tester Package</div>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <div class="  bg-magenta text-center options py-4 py-lg-5" style="background-color: magenta; color: #231250;">Premium</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="row justify-content-center text-center  pt-3 align-items-center">
+        <div class="col-md-2 pb-2 pb-lg-0">
+            Monthly Cost
+        </div>
+        <div class="col-md-10 ">
+            <div class="row justify-content-end">
+                <div class="col-lg-3 col-4">
+                    <p>CA$10.99</p>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <p>N/A</p>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <p>CA$24.99</p>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <hr class="text-white">
+    <div class="row justify-content-center text-center  pt-3 align-items-center">
+        <div class="col-md-2 pb-2 pb-lg-0">
+            Yearly Cost
+        </div>
+        <div class="col-md-10 ">
+            <div class="row justify-content-end">
+                <div class="col-lg-3 col-4">
+                    <p>CA$131.97</p>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <p>CA$29.99</p>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <p>CA$299.97</p>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <hr class="text-white">
+    <div class="row justify-content-center text-center  pt-3 align-items-center">
+        <div class="col-md-2 pb-2 pb-lg-0">
+            Assignment Feature Usage
+        </div>
+        <div class="col-md-10 ">
+            <div class="row justify-content-end">
+                <div class="col-lg-3 col-4">
+                    <p>30 usages per month</p>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <p>35 usages per month</p>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <p>Unlimited</p>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <hr class="text-white">
+    <div class="row justify-content-center text-center  pt-3 align-items-center">
+        <div class="col-md-2 pb-2 pb-lg-0">
+            Unlimited Detector Usage
+        </div>
+        <div class="col-md-10 ">
+            <div class="row justify-content-end">
+                <div class="col-lg-3 col-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark-group--icon default-ltr-cache-4z3qvp e1svuwfo1" style="color: magenta;" data-name="Checkmark" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z" fill="currentColor"></path>
+                      </svg>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark-group--icon default-ltr-cache-4z3qvp e1svuwfo1" style="color: magenta;" data-name="Checkmark" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z" fill="currentColor"></path>
+                      </svg>
+                </div>
+                <div class="col-lg-3 col-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="checkmark-group--icon default-ltr-cache-4z3qvp e1svuwfo1" style="color: magenta;" data-name="Checkmark" aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2928 4.29285L22.7071 5.70706L8.70706 19.7071C8.51952 19.8946 8.26517 20 7.99995 20C7.73474 20 7.48038 19.8946 7.29285 19.7071L0.292847 12.7071L1.70706 11.2928L7.99995 17.5857L21.2928 4.29285Z" fill="currentColor"></path>
+                      </svg>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+   
+</div>
+
+    
+    <div class="col-md-4 pt-5 offset-md-4">
+        <a href="{% url 'step-3'%}" style="text-decoration: none;">
+            <div class="row align-items-center pt-2">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: magenta; font-size: 24px; color: #231250;">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </a>
+    </div>
+        
+</body> -->
+<script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+<stripe-pricing-table 
+pricing-table-id="prctbl_1OSyY4BsAD5ZNWYHwBK7l421"
+publishable-key="pk_test_51NKRn9BsAD5ZNWYHWPyEOE9dGRwsMKJ0UZ0FhzXP1g0pFxGQlyoZfwoG63Z5xkTvVt2749dSTdoBdcQWVya2yKqs00RSROiTUm"
+client-reference-id="{{ request.user.id }}">
+
+</stripe-pricing-table>
+{% endblock content %}

@@ -3,6 +3,7 @@ from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django import forms 
 
 User = get_user_model()
 
@@ -26,6 +27,34 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
         }
 
 
+
+
+class EmailInputWithStyle(forms.widgets.TextInput):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.attrs.update({
+            'style': 'background-color: #231250; font-size: 15px; border-color: magenta;',
+            'class': 'form-control py-3 text-white',
+            'placeholder': 'Email Address'
+        })
+
+class EmailSignupForm(forms.Form):
+    email = forms.EmailField(widget=EmailInputWithStyle)
+class PasswordInputWithStyle(forms.widgets.PasswordInput):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.attrs.update({
+            'style': 'background-color: #231250; font-size: 15px; border-color: magenta;',
+            'class': 'form-control py-3 text-white',
+            'placeholder': 'Add A Password',
+            'label': ''  # Set label to an empty string to remove it
+        })
+
+class PasswordSignupForm(forms.Form):
+    email = forms.EmailField(widget=EmailInputWithStyle)
+    password = forms.CharField(widget=PasswordInputWithStyle)
+    
+    
 class UserSignupForm(SignupForm):
     """
     Form that will be rendered on a user sign up section/screen.

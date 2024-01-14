@@ -12,6 +12,15 @@ from assignment.views import (
     AssignmentListView,
     AssignmentCreateView,
     AssignmentDetailView,
+    PriceView,
+)
+
+from killgpt.users.views import (
+    step_one_signup_teacher,
+    step_one_signup_student, 
+    step_two_signup,
+    subscription_confirm,
+    profile_view,
 )
 class HomeSitemap(Sitemap):
     def items(self):
@@ -27,6 +36,30 @@ sitemaps = {
 urlpatterns = [
     path(
         "landing", TemplateView.as_view(template_name="pages/landing.html"), name="landing"
+    ),
+
+    path(
+        "step2.5", TemplateView.as_view(template_name="steps/twoplan.html"), name="step-2.5"
+    ),
+    path("subscription-confirm/", subscription_confirm, name="subscription_confirm"),
+    path("profile/", profile_view, name="profile"),
+    path(
+        "step1", step_two_signup, name="step-1"
+    ),
+    path(
+        "step2", TemplateView.as_view(template_name="steps/two.html"), name="step-2"
+    ),
+    path(
+        "step3", PriceView, name="step-3"
+    ),
+    path(
+        "entrance", TemplateView.as_view(template_name="pages/entrance.html"), name="entrance"
+    ),
+    path(
+        "student-info", step_one_signup_student, name="student"
+    ),
+    path(
+        "teacher-info", step_one_signup_teacher, name="teacher"
     ),
     path(
         "", TemplateView.as_view(template_name="pages/landing_real.html"), name="landing2"

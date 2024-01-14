@@ -12,6 +12,12 @@ from .models import Assignment
 from django.core.mail import send_mail
 from django.db.models import Avg, F
 from django.db import models
+from djstripe.models import Product
+
+def PriceView(request):
+    return render(request, 'steps/three.html', {
+        'products': Product.objects.all()
+    })
 class AssignmentListView(ListView):
     model = Assignment
     context_object_name = "Assignments"
@@ -36,7 +42,7 @@ class AssignmentListView(ListView):
         context['monthly_detector_usage'] = user.monthly_detector_usage
         context['monthly_assignment_usage'] = user.monthly_assignment_usage
         context['total_assignments_created'] = user.total_assignments_created
-        context['average_assignment_percentage'] = user.average_assignment_percentage
+        context['average_assignment_percentage'] = round(user.average_assignment_percentage)
    
         return context
 class AssignmentDetailView(DetailView):
@@ -53,7 +59,25 @@ from .forms import CustomAssignmentForm
 
 from django.core.exceptions import PermissionDenied
 from datetime import datetime
+from openai import OpenAI
+import re
+from config.settings.base import OPEN_AI_KEY
+def get_assignment_feedback():
+    
+    client = OpenAI(api_key=OPEN_AI_KEY)
+    completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+    {"role": "system", "content": """You are a teaching assistant, skilled in editing assignments in order to make them more engaging, thought provoking, easy to mark, and less prone to students cheating through creating the whole assignment by using ChatGPT. The last part is the top most priority as teachers don't want students to completely plagiarize their assignments
+     ."""},
+    {"role": "user", "content": f"""You are an AI assistant helping an English teacher modernize a current assignment for their high school class. The teacher wants to incorporate ChatGPT (like me) into the assignment to enhance students' learning and writing processes. The assignment revolves around analyzing a chosen piece of literature for themes and character development. The teacher wishes to modernize this assignment by leveraging ChatGPT's capabilities in a way that encourages critical thinking and deeper analysis. Generate an innovative assignment idea that integrates ChatGPT effectively, providing students with a unique and insightful approach to analyzing literature while emphasizing the ethical use of AI in education
+        """}
+        ]
+        )
+    response = completion.choices[0].message
+    txt = response.content
 
+    return txt
 class AssignmentCreateView(LoginRequiredMixin, CreateView):
     model = Assignment
     form_class = CustomAssignmentForm
@@ -87,7 +111,13 @@ class AssignmentCreateView(LoginRequiredMixin, CreateView):
 
         # Call the update_user_fields method to update user-related fields
         self.object.update_user_fields()
+        criteria_text = form.cleaned_data.get('assignment_criteria', None)
 
+        # if criteria_text:
+        #     # If 'criteria' field has a value, do something with it
+        #     # For example, you can assign it to the 'feedback' field
+        #     self.object.feedback = get_assignment_feedback()  # Modify as needed
+        #     self.object.save()
         return result
 
     def get_success_url(self):

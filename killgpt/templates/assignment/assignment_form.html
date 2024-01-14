@@ -7,12 +7,18 @@
 <style>
     /* Style the form field with a white bottom border */
     .custom-form-field {
-      background-color: transparent;
+      /* background-color: transparent;
       border: none;
       border-bottom: 2px solid white;
       color: white;
       margin-bottom: 20px;
-      width: 100%;
+      width: 100%; */
+      background-color: #231250;
+      font-size: 15px;
+      border-color: aqua;
+      color: white;
+      padding-top: 1em;
+      padding-bottom: 1em;   
     }
     
 
@@ -22,17 +28,39 @@
 
     {%if not prediction%}
     <div class="container py-5" >
-        <div class ='col-md-8 offset-md-2 pt-5 rounded ' style="background: #2A1855;;">
-            <h3 class = 'px-5 text-white' > Create Your Assignment</h3>
+        <div class ='col-md-6 offset-md-3 pt-5 rounded '>
+   
+            <div class="text-white pt-0 ps-2">
+         
+         
+              
+              <h3 class="" style="font-size: 2em;">Create the assignment you want help marking.</h3>
+              <h5 class="uppercase" style="font-size: 1em; color: aqua;">Just a few more steps and you're done!
+              </h5>
+            </div>
 
             
-            <div class= 'container p-5 text-white' >
+            <div class= 'container  gy-3 text-white' >
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-            
-                    {{ form|crispy }}
-                    <button class="btn btn-info" id="logout-btn" type="submit">Create Assignment</button>
-                    <a style="text-decoration: none; " class="btn btn-outline-secondary" href="">Cancel</a>
+                    <div class="row py-2 mx-1"> {{ form.assignment_title }}</div>
+                    <div class="row py-2 mx-1">  {{ form.assignment_description}}</div>
+                    <div class="row py-2 mx-1">      {{ form.assignment_criteria }}</div>
+                    <div class="row py-2 mx-1">  {{ form.total_marks }}</div>
+                    <div class="row py-2 mx-1">   {{ form.subject }}</div>
+                   
+                  
+              
+                  
+                 
+                 
+                    <div class="row align-items-center pt-2">
+                      <div class="col-md-12">
+                          <button type="submit" class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: aqua; font-size: 24px; color: #231250;">
+                            Create Assignment
+                          </button>
+                      </div>
+                  </div>
                   </form>
 
                   {% endif%}

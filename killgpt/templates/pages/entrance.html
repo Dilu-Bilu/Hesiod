@@ -1,0 +1,53 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="text-white pt-0 pb-4 text-center">
+    <h3 style="font-size: 3em;"> Are you a</h3>
+</div>
+<style>
+    /* Custom styles for the links */
+    .custom-link {
+    display: inline-block;
+    padding: 25% 25%;
+    text-decoration: none;
+    color: #231250;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 2em;
+    letter-spacing: 2px;
+    transition: all 0.2s ease; /* Updated transition for all properties */
+    }
+
+    .custom-link:hover {
+    letter-spacing: 6px;
+    box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.7); /* White glow effect */
+    }
+
+    /* Colors for the links */
+    .aqua-bg {
+      background-color: aqua;
+    }
+    .magenta-bg {
+      background-color: magenta;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-5 text-center">
+        <a href="{% url 'student' %}" class="custom-link aqua-bg btn btn-lg text">Student</a>
+      </div>
+      <div class="col-md-1 text-white d-flex justify-content-center align-items-center"><h4 class="or-separator">or</h4></div>
+      <div class="col-md-5 text-center">
+        
+        <a href="{% url 'teacher' %}" class="custom-link magenta-bg btn btn-lg">Educator</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock content %}

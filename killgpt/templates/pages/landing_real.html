@@ -274,7 +274,7 @@ header .logo
               {% if request.user.is_authenticated %}
               <a href="{% url 'home' %}">Try It Out</a>
               {% else %}
-              <a href="{% url 'account_signup' %}">Register To Try It Out</a>
+              <a href="{% url 'teacher' %}">Register To Try It Out</a>
               {% endif %}
             
              <a class='glow_button'style="background-color: aqua; margin-left: 1.5%;"href="{% url 'contact' %}">Contact Us</a>
@@ -299,6 +299,7 @@ header .logo
 
         
         {% if request.user.is_authenticated %}
+        <li><a href="{% url 'users:detail' request.user.email %}">Account</a></li>
         <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
         <li><a href="{% url 'home' %}">Detector</a></li>
         <li><a href="{% url 'assignment-list' %}">Assignments</a></li>

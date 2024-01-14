@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="col-md-8 offset-md-2 pt-4">
+  <div class="text-white pt-0 pb-4 text-center">
+    <h3 class="text-uppercase" style="font-size: 2em;">Mastering Hesiod's marking copilot: Your Shortcut Marking Student's Assignments in 60 Seconds!</h3>
+    <h5 class="uppercase" style="font-size: 1em; color: magenta;">[Especially if you are behind schedule]</h5>
+  </div>
+
+  <style>
+    /* Custom styles for the links */
+    .custom-link {
+      display: inline-block;
+      padding: 25% 25%;
+      text-decoration: none;
+      color: #231250;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 2em;
+      letter-spacing: 2px;
+      transition: all 0.2s ease; /* Updated transition for all properties */
+    }
+
+    .custom-link:hover {
+      letter-spacing: 6px;
+      box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.7); /* White glow effect */
+    }
+
+    /* Colors for the links */
+    .aqua-bg {
+      background-color: aqua;
+    }
+    .magenta-bg {
+      background-color: magenta;
+    }
+  </style>
+
+<div class="d-flex justify-content-center text-center" >
+  <div style="position: relative; width: 72%; height: 0; padding-bottom: 40%;">
+    <iframe 
+      src="https://www.youtube.com/embed/LBudghsdByQ?si=U2O6LoxqwBjFGoQb"
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      allowfullscreen
+      style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"
+    ></iframe>
+  </div>
+ 
+
+</div>
+
+<div class="pt-4">
+  <div class="row d-flex align-items-center">
+    <div class="col-md-5 offset-md-2 px-0">
+      <form action="" method="POST" class = 'text-white input-lg py-5'enctype="multipart/form-data" style=" background: var(--background-color);">
+        
+        {% csrf_token %}
+        
+        <div class="form-content">
+          {{ form|crispy }}
+          
+          </div>
+   
+
+    </div>
+    <div class="col px-1">
+      <a href="{% url 'step-1'%}" style="text-decoration: none;">
+        <button type="submit" class=" mb-2 btn btn-lg d-flex align-items-center" style="background-color: magenta; font-size: 24px; font-weight: bold; color: #231250;">Get Started
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-mirrorinrtl="true" class="default-ltr-cache-4z3qvp e1svuwfo1" data-name="ChevronRight" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5859 12L8.29303 19.2928L9.70725 20.7071L17.7072 12.7071C17.8948 12.5195 18.0001 12.2652 18.0001 12C18.0001 11.7347 17.8948 11.4804 17.7072 11.2928L9.70724 3.29285L8.29303 4.70706L15.5859 12Z" fill="currentColor"></path>
+          </svg></button>
+        </form>
+      </a>
+      
+    </div>
+    
+   
+  </div>
+</div>
+
+</div>
+
+{% endblock content %}
