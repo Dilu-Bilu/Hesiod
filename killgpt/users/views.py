@@ -81,6 +81,8 @@ def step_one_signup_student(request):
 
 from django.contrib.auth import authenticate, login
 
+from django.contrib import messages
+
 def step_two_signup(request):
     if 'signup_email' not in request.session:
         return redirect('signup_email')  # Redirect to email step if email is not available
@@ -90,6 +92,11 @@ def step_two_signup(request):
         if form.is_valid():
             email = request.session.get('signup_email')
             password = form.cleaned_data['password']
+            
+            # Check if the email is already associated with a user
+            if User.objects.filter(email=email).exists():
+                messages.warning(request, 'Email is already registered. Please use a different email.')
+                return render(request, 'steps/one.html', {'form': form, 'email': email})
             
             # Create the user with the collected email and password
             user = User.objects.create_user(email=email, password=password, username=email)
@@ -113,7 +120,6 @@ def step_two_signup(request):
 
         form = PasswordSignupForm(initial={'email': email})
         
-
     return render(request, 'steps/one.html', {'form': form, 'email': email})
 class UserDetailView(LoginRequiredMixin, DetailView):
 

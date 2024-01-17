@@ -259,12 +259,10 @@ def get_feedback(total_marks, assignment_prompt, rubric_criteria, student_writin
         """}
         ]
         )
-    def prettify_for_html(string_with_newlines):
-        # Replace '\n' with HTML line break tags '<br>'
-        prettified_string = string_with_newlines.replace('\n', '<br>')
-        return prettified_string
+
     response = completion.choices[0].message
     txt = response.content
+    print(txt)
 
     # Extract marks
     marks = re.search(r"(\d+/\d+)", txt)
@@ -286,10 +284,15 @@ def get_feedback(total_marks, assignment_prompt, rubric_criteria, student_writin
         gen_advice = gen_advice[0]
     else:
         gen_advice = None
-    marks_display = marks.split('/')
-    top = int(marks_display[0])
-    bot = int(marks_display[1])
-    display_mark = top/bot
+    if marks is not None:
+        marks_display = marks.split('/')
+        top = int(marks_display[0])
+        bot = int(marks_display[1])
+        display_mark = top/bot
+    else:
+        # Handle the case where marks is None
+        display_mark = 0  # or any other default value or logic
+   
     return marks, feedback, gen_advice, display_mark
 
 # Only signed in users can go onto the detector 
@@ -362,7 +365,7 @@ def TextInputView(request):
             user.update_lifetime_detector_usage()  # Increment lifetime usage
             user.update_monthly_detector_usage()  # Update monthly usage
             user.save()
-            if feedback_input == True:
+            if feedback_input == True and (score > 8.25):
                 context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text, 'marks': marks, 'gen_advice': gen_advice, 'feedback': feedback, 'display_mark': display_mark}
             else:
                 context = {'form': form, 'percent': percent , 'output': score, 'score': score, 'decision': decision, 'input_text': input_text,}
