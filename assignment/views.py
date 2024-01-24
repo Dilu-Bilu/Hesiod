@@ -8,10 +8,9 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from killgpt.users.models import User
-from .models import Assignment
+from .models import Assignment, Example_Text
 from django.core.mail import send_mail
 from django.db.models import Avg, F
-from django.db import models
 from djstripe.models import Product
 
 def PriceView(request):
@@ -55,29 +54,54 @@ class AssignmentDetailView(DetailView):
     
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import CustomAssignmentForm
+from .forms import CustomAssignmentForm, Example_TextForm
 
 from django.core.exceptions import PermissionDenied
 from datetime import datetime
 from openai import OpenAI
 import re
-from config.settings.base import OPEN_AI_KEY
-def get_assignment_feedback():
+# from config.settings import OPEN_AI_KEY
+# def get_assignment_feedback():
     
-    client = OpenAI(api_key=OPEN_AI_KEY)
-    completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-    {"role": "system", "content": """You are a teaching assistant, skilled in editing assignments in order to make them more engaging, thought provoking, easy to mark, and less prone to students cheating through creating the whole assignment by using ChatGPT. The last part is the top most priority as teachers don't want students to completely plagiarize their assignments
-     ."""},
-    {"role": "user", "content": f"""You are an AI assistant helping an English teacher modernize a current assignment for their high school class. The teacher wants to incorporate ChatGPT (like me) into the assignment to enhance students' learning and writing processes. The assignment revolves around analyzing a chosen piece of literature for themes and character development. The teacher wishes to modernize this assignment by leveraging ChatGPT's capabilities in a way that encourages critical thinking and deeper analysis. Generate an innovative assignment idea that integrates ChatGPT effectively, providing students with a unique and insightful approach to analyzing literature while emphasizing the ethical use of AI in education
-        """}
-        ]
-        )
-    response = completion.choices[0].message
-    txt = response.content
+#     client = OpenAI(api_key=OPEN_AI_KEY)
+#     completion = client.chat.completions.create(
+#     model="gpt-3.5-turbo",
+#     messages=[
+#     {"role": "system", "content": """You are a teaching assistant, skilled in editing assignments in order to make them more engaging, thought provoking, easy to mark, and less prone to students cheating through creating the whole assignment by using ChatGPT. The last part is the top most priority as teachers don't want students to completely plagiarize their assignments
+#      ."""},
+#     {"role": "user", "content": f"""You are an AI assistant helping an English teacher modernize a current assignment for their high school class. The teacher wants to incorporate ChatGPT (like me) into the assignment to enhance students' learning and writing processes. The assignment revolves around analyzing a chosen piece of literature for themes and character development. The teacher wishes to modernize this assignment by leveraging ChatGPT's capabilities in a way that encourages critical thinking and deeper analysis. Generate an innovative assignment idea that integrates ChatGPT effectively, providing students with a unique and insightful approach to analyzing literature while emphasizing the ethical use of AI in education
+#         """}
+#         ]
+#         )
+#     response = completion.choices[0].message
+#     txt = response.content
 
-    return txt
+#     return txt
+
+
+    
+
+
+class ExampleCreateView(LoginRequiredMixin, CreateView):
+    model = Example_Text
+    form_class = Example_TextForm
+
+    template_name = "assignment/example.html"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.assignment = get_object_or_404(Assignment, id=self.kwargs["pk"])
+        
+        
+        
+        # form.instance.send_simple_message()
+        # test all of the instance
+       
+        return super().form_valid(form)
+
+    success_url = reverse_lazy("assignment-list")
+
+
 class AssignmentCreateView(LoginRequiredMixin, CreateView):
     model = Assignment
     form_class = CustomAssignmentForm
@@ -120,14 +144,28 @@ class AssignmentCreateView(LoginRequiredMixin, CreateView):
         #     self.object.save()
         return result
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add additional context variables here
+        context['action'] = 'Create'
+        return context
+
     def get_success_url(self):
         return reverse('assignment-detail', kwargs={'pk': self.object.pk})
 
 
 class AssignmentUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = Assignment
-    fields = ["title", "content"]
-
+    # fields = [
+    #     'assignment_title',
+    #     'assignment_description',
+    #     'assignment_criteria',
+    #     'total_marks',           
+    #     'subject',
+    # ]
+    
+    template_name = "assignment/assignment_form.html"
+    form_class = CustomAssignmentForm
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
@@ -137,6 +175,11 @@ class AssignmentUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
         if self.request.user == Assignments.user:
             return True
         return False
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add additional context variables here
+        context['action'] = 'Edit'
+        return context
 
 
 class AssignmentDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):

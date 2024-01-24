@@ -13,6 +13,8 @@ from assignment.views import (
     AssignmentCreateView,
     AssignmentDetailView,
     PriceView,
+    ExampleCreateView,
+    AssignmentUpdateView
 )
 
 from killgpt.users.views import (
@@ -67,6 +69,13 @@ urlpatterns = [
     path(
         "assignment", AssignmentListView.as_view(), name="assignment-list"
     ),
+
+    path(
+        "assignment/<int:pk>/update/",
+        AssignmentUpdateView.as_view(),
+        name="assignment-update",
+    ),
+    path("assignment/uploadexample/<int:pk>", ExampleCreateView.as_view(), name="example-create"),
     path("assignment/new/", AssignmentCreateView.as_view(), name="assignment-create"),
     path("detector/", TextInputView, name="home"),
     # path("AI/", TextInputView, name='AI'),

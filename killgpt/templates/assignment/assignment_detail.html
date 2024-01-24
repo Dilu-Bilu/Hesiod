@@ -91,6 +91,7 @@
         -webkit-text-fill-color: transparent;
     }
 </style>
+
 <div class="col-md-10 offset-md-1 pt-5">
     <div class="row">
 
@@ -136,7 +137,27 @@
                     </div>
     
                 </a>
-
+                <a href="{% url 'example-create' assignment.pk %}" style="text-decoration: none;">
+                    <div class="row align-items-center pt-2">
+                        <div class="col-md-12">
+                            <button class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: aqua; font-size: 24px; color: #231250;">
+                              Upload An Example
+                            </button>
+                        </div>
+                    </div>
+    
+                </a>
+                
+                <a href="{% url 'assignment-update' assignment.pk %}" style="text-decoration: none;">
+                    <div class="row align-items-center pt-2">
+                        <div class="col-md-12">
+                            <button class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: white; font-size: 24px; color: #231250;">
+                              Edit Assignment
+                            </button>
+                        </div>
+                    </div>
+    
+                </a>
             </div>
             <!-- <div class="container py-4" style="background-color: white;">
                 <h3><span class="gradient-text2"> Assignment Recommendation</span></h3>

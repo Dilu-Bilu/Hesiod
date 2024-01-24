@@ -24,20 +24,20 @@
 
 
   </style>
-<main role="main" >
+<main role="main pt-5 pt-md-0" >
+  <div class="row pt-5 pt-md-0">
+    <div class="col-md-6 d-flex justify-content-center align-items-center" >
+      <div class="text-white pt-0 ps-2">
 
-    {%if not prediction%}
+        <h2 class="" style="font-size: 2em;">{{action}} the assignment you want help marking.</h2>
+        <h3 class="uppercase" style="font-size: 1em; color: aqua;">Help us learn what you are marking.
+        </h3>
+      </div>
+    </div>
+    <div class="col-md-6">
+      {%if not prediction%}
     <div class="container py-5" >
-        <div class ='col-md-6 offset-md-3 pt-5 rounded '>
-   
-            <div class="text-white pt-0 ps-2">
-         
-         
-              
-              <h3 class="" style="font-size: 2em;">Create the assignment you want help marking.</h3>
-              <h5 class="uppercase" style="font-size: 1em; color: aqua;">Just a few more steps and you're done!
-              </h5>
-            </div>
+        <div class ='pt-5 rounded '>
 
             
             <div class= 'container  gy-3 text-white' >
@@ -56,8 +56,8 @@
                  
                     <div class="row align-items-center pt-2">
                       <div class="col-md-12">
-                          <button type="submit" class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: aqua; font-size: 24px; color: #231250;">
-                            Create Assignment
+                          <button type="submit" class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: white; font-size: 24px; color: #231250;">
+                            {{action}} Assignment
                           </button>
                       </div>
                   </div>
@@ -72,6 +72,9 @@
 
 
     </div>
-</main>
+
+    </div>
+</div>
+    </main>
 
 {% endblock content %}

@@ -1,0 +1,76 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    /* Style the form field with a white bottom border */
+    .custom-form-field {
+      /* background-color: transparent;
+      border: none;
+      border-bottom: 2px solid white;
+      color: white;
+      margin-bottom: 20px;
+      width: 100%; */
+      background-color: #231250;
+      font-size: 15px;
+      border-color: aqua;
+      color: white;
+      padding-top: 1em;
+      padding-bottom: 1em;   
+    }
+    
+
+
+  </style>
+<main role="main" >
+
+    {%if not prediction%}
+    <div class="container py-5" >
+        <div class ='col-md-6 offset-md-3 pt-5 rounded '>
+   
+            <div class="text-white pt-0 ps-2">
+         
+         
+              
+              <h3 class="" style="font-size: 2em;">Input a student's work that you marked</h3>
+              <h5 class="uppercase" style="font-size: 1em; color: aqua;">Just a few more steps and you're done!
+              </h5>
+            </div>
+
+            
+            <div class= 'container  gy-3 text-white' >
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row py-2 mx-1"> {{ form.text }}</div>
+                    <div class="row py-2 mx-1">  {{ form.comments}}</div>
+                    <div class="row py-2 mx-1">      {{ form.marks }}</div>
+                    
+                   
+                  
+              
+                  
+                 
+                 
+                    <div class="row align-items-center pt-2">
+                      <div class="col-md-12">
+                          <button type="submit" class="btn btn-lg w-100 d-flex py-3 justify-content-center align-items-center" style="background-color: aqua; font-size: 24px; color: #231250;">
+                            Upload Example
+                          </button>
+                      </div>
+                  </div>
+                  </form>
+
+                  {% endif%}
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</main>
+
+{% endblock content %}

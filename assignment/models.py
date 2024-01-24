@@ -75,3 +75,13 @@ class Assignment(models.Model):
     #     results = Comment.objects.filter(question=self).count()
     #     print(results)
     #     return results
+
+class Example_Text(models.Model):
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    text = models.TextField(null=True)
+    marks = models.IntegerField()
+    comments = models.TextField(null=True)
+
+    def __str__(self):
+        return self.assignment
+

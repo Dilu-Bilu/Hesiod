@@ -227,7 +227,7 @@ def get_feedback(total_marks, assignment_prompt, rubric_criteria, student_writin
     completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-    {"role": "system", "content": "You are a teaching assistant, skilled in marking your student's english/history writings with brutal honesty white giving them feedback of how they can improve their writing in each criteria through using examples from their writing and showing how they can be improved. Also you mark very hard and are often too hard at marking."},
+    {"role": "system", "content": "You are a teaching assistant, skilled in marking your student's english/history writings with brutal honesty white giving them feedback of how they can improve their writing in each criteria through using examples from their writing and showing how they can be improved. Also you mark very moderately and are a fair marker, who does not give students a hard time."},
     {"role": "user", "content": f"""Task: Evaluate a student's writing based on an assignment prompt, rubric criteria, and provide constructive feedback with overall advice and direct sentence examples of how improvements cuold be made by using example sentences inside the student's work. 
 
         Assignment Marks: 
@@ -288,7 +288,7 @@ def get_feedback(total_marks, assignment_prompt, rubric_criteria, student_writin
         marks_display = marks.split('/')
         top = int(marks_display[0])
         bot = int(marks_display[1])
-        display_mark = top/bot
+        display_mark = 100 * (top/bot)
     else:
         # Handle the case where marks is None
         display_mark = 0  # or any other default value or logic
@@ -310,12 +310,18 @@ def TextInputView(request):
             
             # Accessing the feedback_choice value from the submitted form
             feedback_choice = form.cleaned_data['feedback_choice']
-            # Get the Feedback object based on the selected feedback_choice (assuming Feedback is related to the Assignment model)
-            feedback = Assignment.objects.get(pk=feedback_choice)
-            #total_marks, assignment_prompt, rubric_criteria, student_writing
-            total_marks = feedback.total_marks
-            assignment_prompt = feedback.assignment_description
-            rubric_criteria = feedback.assignment_criteria
+            
+            try:
+                # Get the Feedback object based on the selected feedback_choice (assuming Feedback is related to the Assignment model)
+                feedback = Assignment.objects.get(pk=feedback_choice)
+                #total_marks, assignment_prompt, rubric_criteria, student_writing
+                total_marks = feedback.total_marks
+                assignment_prompt = feedback.assignment_description
+                rubric_criteria = feedback.assignment_criteria
+            except:
+                total_marks = 0
+                assignment_prompt = ""
+                rubric_criteria = ""
             
 
             # validate the file's content
